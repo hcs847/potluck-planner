@@ -1,8 +1,10 @@
 import logo from './logo.svg';
 import Landing from './pages/Landing';
 import Recipes from './pages/Recipes';
-import Nav from './components/Nav';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Nav from './components/Nav';
 
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/recipes" component={Recipes} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </div>
     </Router>
