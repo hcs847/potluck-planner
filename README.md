@@ -7,6 +7,15 @@ Once users have signed up for an account, they can sign in to create their potlu
 
 Now, quit ordering your overpriced delivery meals and plan that potluck!
 
+## Technologies Used
+- React
+- GraphQL
+- Node.js
+- Express.js
+- MongoDB
+- Reactstrap/CSS
+- Deployed to Heroku
+
 ## Future Development
 
 - Restricting user to a potluck view
@@ -15,3 +24,11 @@ Now, quit ordering your overpriced delivery meals and plan that potluck!
 - Sending emails/notifications when new guests join and sign up for items
 - Enhancing the user dashboard with past events, favorited guests, etc.
 - Adding images as potluck theme
+
+## License
+
+## Contact
+ 
+Hila Caspi - 
+Stephen Beiter - 
+Bennett Collier - bennett.collier1@gmail.com
