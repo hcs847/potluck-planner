@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import Landing from './pages/Landing';
+import Home from './pages/Home';
+import Event from './pages/Event';
 import Recipes from './pages/Recipes';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -15,6 +17,8 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" component={Landing} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/event" component={Event} />
           <Route exact path="/recipes" component={Recipes} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
