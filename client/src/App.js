@@ -1,3 +1,4 @@
+import { storeProvider, StoreProvider } from './utils/GlobalState';
 import logo from './logo.svg';
 import Landing from './pages/Landing';
 import Home from './pages/Home';
@@ -14,15 +15,17 @@ function App() {
     <Router>
       <div className="App">
         <img src={logo} style={{ maxWidth: '10%', margin: '0.1rem' }} alt="logo" />
-        <Nav />
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/event" component={Event} />
-          <Route exact path="/recipes" component={Recipes} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
-        </Switch>
+        <StoreProvider>
+          <Nav />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/event" component={Event} />
+            <Route exact path="/recipes" component={Recipes} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+          </Switch>
+        </StoreProvider>
       </div>
     </Router>
   );

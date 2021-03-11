@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useStoreContext } from '../../utils/GlobalState';
 
 
 const EventForm = () => {
@@ -17,8 +18,8 @@ const EventForm = () => {
         dishDescription: ""
     }]);
 
-    // Dynamic remdering of input fields for dishes and guests
-    // to enable submitter to change number of dishes and guests dynamically
+    // Dynamic rendering of input fields for dishes and guests
+    // to enable submitter to change dishes and guests entered dynamically
     const handleChangeInputFields = (id, event, inputFields, setFieldState) => {
         const newInputFields = inputFields.map(field => {
             if (id === field.id) {
@@ -30,7 +31,7 @@ const EventForm = () => {
     }
 
 
-    // Dynamically rendering object keys 
+    // Dynamically adding new input fields and rendering object keys 
     const handleAddInputFields = (e, setFieldState, inputFields, fieldA, fieldB) => {
         e.preventDefault();
         setFieldState([...inputFields, {
@@ -46,10 +47,10 @@ const EventForm = () => {
 
     // handling state for all other fields in Event Form
     const [formState, setFormState] = useState({
-        eventName: '', message: '', date: '', time: '', location: '', dish: ''
+        eventName: '', message: '', date: '', time: '', location: ''
     });
 
-    // handling change for each field within form
+    // handling change for other fields within form
     const handleChangeForm = (event) => {
         const { name, value } = event.target;
         setFormState({
@@ -58,12 +59,12 @@ const EventForm = () => {
         })
     };
 
-    const [eventState, setEventState] = useState({ ...formState, guests: guestInputFields, dishes: dishInputFields });
+    const [currentEvent, setCurrentEvent] = useState({ id: '', ...formState, guests: guestInputFields, dishes: dishInputFields });
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        setEventState({ ...formState, guests: guestInputFields, dishes: dishInputFields });
-
+        setCurrentEvent({ id: Math.floor(Math.random() * 100), ...formState, guests: guestInputFields, dishes: dishInputFields });
+        console.log("current event: ", currentEvent);
     }
 
     return (
@@ -136,7 +137,7 @@ const EventForm = () => {
                             onChange={(e) => handleChangeInputFields(guestInputField.id, e, guestInputFields, setGuestInputFields)}
                         />
 
-                        <label htmlFor="guestEmail">Guest Name:</label>
+                        <label htmlFor="guestEmail">Guest Email:</label>
                         <input
                             placeholder="Guest Email"
                             name="guestEmail"
