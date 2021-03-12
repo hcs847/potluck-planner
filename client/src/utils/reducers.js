@@ -1,5 +1,6 @@
 import {
-    ADD_EVENT
+    ADD_EVENT,
+    UPDATE_EVENTS,
 } from "./actions";
 import React, { useReducer } from 'react';
 
@@ -12,6 +13,11 @@ export const reducer = (state, action) => {
             };
         }
 
+        case UPDATE_EVENTS:
+            return {
+                ...state,
+                events: [...action.events],
+            }
         default:
             return state;
     }

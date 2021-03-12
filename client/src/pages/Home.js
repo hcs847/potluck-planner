@@ -1,15 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../utils/GlobalState';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_EVENTS } from '../utils/queries';
+import { UPDATE_EVENTS } from '../utils/actions';
 
 
 const Home = () => {
-    const { loading, data: events } = useQuery(QUERY_EVENTS);
+    const { loading, data } = useQuery(QUERY_EVENTS);
     const [state, dispatch] = useGlobalContext();
-    const { events } = state;
-    console.log("events  :", events[0]);
+    // const { events } = state;
+    // console.log("events  :", events);
+
+    useEffect(() => {
+        if (data) {
+            dispatch({
+                type: UPDATE_EVENTS,
+                events: data.events
+            })
+        }
+    }, [data, loading, dispatch]);
+
+    const events = state?.events || [];
+
+    if (!events?.length) {
+        return <h3>There are no Upcoming Events.</h3>
+    }
+
 
     return (
         <>
