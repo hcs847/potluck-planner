@@ -10,8 +10,11 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select('-__v -password');
+        const gEvents = await Event.find({ guests: { _id: context.user._id } });
+        const hEvents = await Event.find({ host: { _id: context.user._id } });
 
-        return userData;
+
+        return { ...userData, guestEvents: gEvents, hostEvents: hEvents };
       }
 
       throw new AuthenticationError('Not logged in');
