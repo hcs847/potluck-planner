@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 const Nav = () => {
     return (
         <nav>
-            <ul>
-                <Link to='/Home'>
+            <ul style={{ listStyle: 'none', display: "flex", gap: "1rem" }}>
+                <Link to='/home'>
                     <li>Home</li>
                 </Link>
-                <Link to='/Potlucks'>
-                    <li>Potlucks</li>
+                <Link to='/potluck'>
+                    <li>Potluck Plannning</li>
                 </Link>
-                <Link to='/Recipes'>
+                <Link to='/recipes'>
                     <li>Recipes</li>
                 </Link>
                 <li>Logout</li>
