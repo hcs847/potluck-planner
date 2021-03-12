@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Signup = () => {
-    const [formState, setFormState] = useState({ email: '', password: '' });
+    const [formState, setFormState] = useState({ firstName: '', lastName: '', email: '', password: '' });
     // add useMutation
     // ================ 
 
@@ -55,7 +55,7 @@ const Signup = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="pwd">Passeord:</label>
+                    <label htmlFor="pwd">Password:</label>
                     <input
                         placeholder="******"
                         name="password"
