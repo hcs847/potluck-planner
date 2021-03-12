@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../utils/GlobalState';
 import Event from '../pages/Event';
 
+
 const Home = () => {
     const [state, dispatch] = useGlobalContext();
     const { events } = state;
@@ -14,7 +15,7 @@ const Home = () => {
             <ul style={{ listStyle: "none" }}>
                 {events.map(event => (
 
-                    < Event key={event.eventId} event={event} />
+                    < Event key={event._id} event={event} />
 
                 ))}
             </ul>

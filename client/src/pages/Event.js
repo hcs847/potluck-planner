@@ -6,7 +6,7 @@ const Event = ({ event }) => {
 
     return (
         <div>
-            <Link to={`/event/${event.eventId}`}>
+            <Link to={`/event/${event._id}`}>
                 <li style={{ textDecoration: "none", fontWeight: "bolder" }}>{event.eventName}</li>
             </Link>
 

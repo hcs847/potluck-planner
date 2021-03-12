@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { useStoreContext } from '../../utils/GlobalState';
+import React, { useState, useContext } from 'react';
+import { useGlobalContext } from '../../utils/GlobalState';
 
 
 const EventForm = () => {
 
     // state for guest list
     const [guestInputFields, setGuestInputFields] = useState([{
-        id: Math.floor(Math.random() * 100),
+        id: Math.floor(Math.random() * 1000),
         guestName: "",
         guestEmail: ""
     }]);
 
     // state for dish list
     const [dishInputFields, setDishInputFields] = useState([{
-        id: Math.floor(Math.random() * 100),
+        id: Math.floor(Math.random() * 1000),
         dishType: "",
         dishDescription: ""
     }]);
@@ -59,12 +59,26 @@ const EventForm = () => {
         })
     };
 
-    const [currentEvent, setCurrentEvent] = useState({ id: '', ...formState, guests: guestInputFields, dishes: dishInputFields });
+
+    const [state, dispatch] = useGlobalContext();
+
+
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        setCurrentEvent({ id: Math.floor(Math.random() * 100), ...formState, guests: guestInputFields, dishes: dishInputFields });
-        console.log("current event: ", currentEvent);
+
+        const newEvent = {
+            id: Math.floor(Math.random() * 1000),
+            ...formState,
+            guests: guestInputFields,
+            dishes: dishInputFields
+        }
+
+        console.log("New event: ", newEvent);
+        dispatch({
+            type: "ADD_EVENT",
+            payload: newEvent
+        })
     }
 
     return (

@@ -1,5 +1,4 @@
 
-// export const UPDATE_DISHES = "UPDATE_DISHES";
-// export const UPDATE_GUESTS = "UPDATE_GUESTS";
+export const ADD_EVENT = "ADD_EVENT";
 
 
