@@ -23,7 +23,7 @@ function App() {
             <Route exact path="/" component={Landing} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/potluck" component={PlanEvent} />
-            <Route exact path="/event/:eventId" component={Event} />
+            <Route exact path="/event/:_id" component={Event} />
             <Route exact path="/recipes" component={Recipes} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />

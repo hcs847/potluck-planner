@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../utils/GlobalState';
-import Event from '../pages/Event';
+import { useQuery } from '@apollo/react-hooks';
+import { QUERY_EVENTS } from '../utils/queries';
 
 
 const Home = () => {
+    const { loading, data: events } = useQuery(QUERY_EVENTS);
     const [state, dispatch] = useGlobalContext();
     const { events } = state;
     console.log("events  :", events[0]);
@@ -14,8 +16,9 @@ const Home = () => {
             <h2>Your Events</h2>
             <ul style={{ listStyle: "none" }}>
                 {events.map(event => (
-
-                    < Event key={event._id} event={event} />
+                    <Link key={event._id} to={`/event/${event._id}`}>
+                        <li style={{ textDecoration: "none", fontWeight: "bolder" }}>{event.eventName}</li>
+                    </Link>
 
                 ))}
             </ul>

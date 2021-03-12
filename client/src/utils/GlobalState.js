@@ -15,6 +15,9 @@ const GlobalProvider = ({ value = [], ...props }) => {
                 date: "04-01-2021",
                 time: "12:00 PM",
                 location: "The Kitchen",
+                host: {
+                    email: "hcaspi@email.com"
+                },
                 dishes: [
                     { dishDescription: "", dishType: "Mains", dishId: 2001 },
                     { dishDescription: "", dishType: "Sides", dishId: 2002 },
