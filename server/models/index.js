@@ -1,5 +1,5 @@
 const User = require('./User');
-const Product = require('./Product');
-const Category = require('./Category');
+const Dish = require('./Dish');
+const Event = require('./Event');
 
-module.exports = { User, Product, Category };
+module.exports = { User, Dish, Event };

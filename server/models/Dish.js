@@ -3,35 +3,27 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const dishSchema = new Schema({
-  name: {
+  provider: {
+    type: Schema.Types.ObjectId,
+    required: true
+  },
+  dishName: {
     type: String,
-    required: true,
-    unique: true,
     trim: true
   },
-  description: {
-    type: String
-  },
-  image: {
-    type: String
-  },
-  price: {
-    type: Number,
-    required: true,
-    min: 0.99
+  type: {
+    type: String,
+    enum: ['Main dish', 'Dessert', '']
   },
   quantity: {
     type: Number,
     min: 0,
     default: 0
   },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category',
-    required: true
-  }
+  dishDiet: [{
+    type: String,
+    enum: ['None', 'Vegan', 'Vegetarian', 'Kosher', 'Halal', 'Dairy-free', 'Nut-free', 'Gluten-free']
+  }]
 });
 
-const Dish = mongoose.model('Dish', dishSchema);
-
-module.exports = Dish;
+module.exports = dishSchema;

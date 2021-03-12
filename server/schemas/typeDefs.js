@@ -1,60 +1,87 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type Category {
-    _id: ID
-    name: String
-  }
 
-  type Product {
-    _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    category: Category
-  }
+type User {
+  _id: ID
+  firstName: String
+  lastName: String
+  email: String
+  userDiet: [String]
+}
 
-  type Order {
-    _id: ID
-    purchaseDate: String
-    products: [Product]
-  }
+type Dish {
+  _id: ID
+  dishName: String
+  type: String
+  price: Int
+  quantity: Int
+  dishDiet: String
+}
 
-  type User {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    orders: [Order]
-  }
+type Event {
+  _id: ID
+  eventName: String
+  message: String
+  date: String
+  time: String
+  location: String
+  host: User
+  guests: [User]
+  guestCount: Int
+  dishes: [Dish]
+}
 
-  type Auth {
-    token: ID
-    user: User
-  }
+type Auth {
+  token: ID!
+  user: User
+}
 
-  type Query {
-    categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
-    user: User
-    order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
-  }
+type Query {
 
-  type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
-    login(email: String!, password: String!): Auth
-  }
+  me: User
 
-  type Checkout {
-    session: ID
-  }
+  users: [User]
+
+  events: [Event]
+
+  user(email: String!): User
+
+  event(_id: String): [Event]
+}
+
+type Mutation {
+
+  login(email: String!, password: String!): Auth
+
+  addUser(
+    email: String!,
+    password: String!,
+    firstName: String!,
+    lastName: String!,
+    userDiet: String
+    ): Auth
+
+  addEvent(
+    eventName: String!,
+    message: String,
+    date: String,
+    time: String,
+    location: String,
+    guests:[String],
+    dishes:[String]
+    ): Event
+
+  addDish(
+    eventId: ID!,
+    dishName: String!,
+    type: String,
+    quantity: Int,
+    dishDiet: [String]
+  ): Event
+
+  addGuest(eventId: ID!, email:String!): Event
+}
 `;
 
 module.exports = typeDefs;
