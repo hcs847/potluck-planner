@@ -6,6 +6,18 @@ import Login from './pages/Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Nav from './components/Nav';
 
+// reactstrap?
+import 'bootsrap/dist/css/bootstrap.min.css'
+// import Button from 'react-bootstrap/Button';
+import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button'
+// import {
+//  Container, Col, Form,
+//  FormGroup, Label, Input,
+//  Button,} 
+//  from 'reactstrap';
+import './App.css';
+
 
 function App() {
   return (
@@ -25,3 +37,4 @@ function App() {
 }
 
 export default App;
+
