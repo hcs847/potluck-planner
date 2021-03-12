@@ -13,8 +13,11 @@ const Home = () => {
             <h2>Your Events</h2>
             <ul style={{ listStyle: "none" }}>
                 {events.map(event => (
+                    <Link to={`/event/${event.eventId}`}>
+                        <li style={{ textDecoration: "none", fontWeight: "bolder" }}>{event.eventName}</li>
+                    </Link>
 
-                    < Event key={event.eventId} event={event} />
+                    // < Event key={event.eventId} event={event} />
 
                 ))}
             </ul>
