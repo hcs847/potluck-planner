@@ -11,6 +11,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Nav from './components/Nav';
 
 
+//import './App.css';
+
+
 
 function App() {
   return (
@@ -35,3 +38,4 @@ function App() {
 }
 
 export default App;
+
