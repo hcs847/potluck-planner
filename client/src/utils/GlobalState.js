@@ -51,15 +51,15 @@ const GlobalProvider = ({ value = [], ...props }) => {
     })
 
     // test
-    console.log(state.events);
+    console.log("state.events: ", state.events);
 
-    // actions
-    function addEvent(event) {
-        dispatch({
-            type: 'ADD_EVENT',
-            payload: event
-        });
-    }
+    // // actions
+    // function addEvent(event) {
+    //     dispatch({
+    //         type: 'ADD_EVENT',
+    //         payload: event
+    //     });
+    // }
 
     return <Provider value={[state, dispatch]} {...props} />;
 };

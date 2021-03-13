@@ -13,18 +13,18 @@ const Home = () => {
     // console.log("events  :", events);
 
 
-    useEffect(() => {
-        if (data) {
-            dispatch({
-                type: UPDATE_EVENTS,
-                events: data.events
-            })
-            console.log("Data:  ", data);
-        }
+    // useEffect(() => {
+    //     if (data) {
+    //         dispatch({
+    //             type: UPDATE_EVENTS,
+    //             events: data.events
+    //         })
+    //         console.log("Data:  ", data);
+    //     }
 
-    }, [data, loading, dispatch]);
+    // }, [data, loading, dispatch]);
 
-    const events = state?.events || [];
+    const events = data?.events || [];
 
     if (!events?.length) {
         return <h3>There are no Upcoming Events.</h3>

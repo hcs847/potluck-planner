@@ -58,3 +58,33 @@ export const ADD_EVENT = gql`
   
 }
 `;
+
+export const ADD_DISH = gql`
+  mutation addDish(
+      $eventId: ID!,
+      $dishName: String!,
+  	  $dishType: String
+     ) {
+    addDish(
+        eventId: $eventId,
+        dishName: $dishName,
+      	dishType: $dishType,
+      ) {
+        _id
+    eventName
+    location
+    host {
+      firstName
+      lastName
+      email
+    }
+    guests {
+      firstName
+    }
+    dishes {
+      dishName
+      dishType
+    }
+      }
+}
+`;

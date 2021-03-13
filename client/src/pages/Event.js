@@ -10,14 +10,13 @@ const Event = () => {
     const { _id: id } = useParams();
 
     const singleEvent = () => {
-        return events.filter(event => event._id === parseInt(id))
+        return events.filter(event => event._id === id)
     }
 
     console.log("id: ", typeof (id), id, singleEvent());
 
     return (
         <div>
-
             {singleEvent().map(event => (
                 // {events.map(event => (
                 <ul key={event._id} style={{ listStyle: "none" }}>
