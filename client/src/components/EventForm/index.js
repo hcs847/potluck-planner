@@ -1,8 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { useGlobalContext } from '../../utils/GlobalState';
+import { useMutation } from '@apollo/react-hooks';
+import { ADD_EVENT } from '../../utils/mutations';
+import { QUERY_EVENTS } from '../../utils/queries';
 
 
 const EventForm = () => {
+    // addEvent function from graphql mutations functions
+    const [addEvent, { error }] = useMutation(ADD_EVENT);
 
     // state for guest list
     const [guestInputFields, setGuestInputFields] = useState([{
@@ -64,21 +69,30 @@ const EventForm = () => {
 
 
 
-    const handleSubmitForm = (e) => {
-        e.preventDefault();
+    const handleSubmitForm = async event => {
+        event.preventDefault();
 
         const newEvent = {
-            id: Math.floor(Math.random() * 1000),
+            // id: Math.floor(Math.random() * 1000),
             ...formState,
-            guests: guestInputFields,
-            dishes: dishInputFields
+            // guests: guestInputFields,
+            // dishes: dishInputFields
         }
 
         console.log("New event: ", newEvent);
+
         dispatch({
             type: "ADD_EVENT",
             payload: newEvent
-        })
+        });
+
+        try {
+            await addEvent({
+                variables: { ...formState }
+            });
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     return (

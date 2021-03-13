@@ -22,6 +22,7 @@ const Event = () => {
                 // {events.map(event => (
                 <ul key={event._id} style={{ listStyle: "none" }}>
                     <li style={{ fontWeight: "bolder" }}>{event.eventName}</li>
+                    <li>{event.guests.firstName}</li>
                     <li>{event.date}</li>
                     <li>{event.time}</li>
                     <li>{event.location}</li>

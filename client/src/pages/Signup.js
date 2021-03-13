@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
+import { ADD_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 const Signup = () => {
     const [formState, setFormState] = useState({ firstName: '', lastName: '', email: '', password: '' });
-    // add useMutation
-    // ================ 
 
-    const handleFormSubmit = (event) => {
+    // useMutation hook plus destructuring error to alret user of issues
+    const [addUser, { error }] = useMutation(ADD_USER);
+
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        // link to mutation
-        // ================
+
+        try {
+            const { data } = await addUser({
+                variables: { ...formState }
+            });
+            Auth.login(data.addUser.token);
+        } catch (e) {
+            console.error(e);
+        }
+
     }
 
     const handleChange = event => {

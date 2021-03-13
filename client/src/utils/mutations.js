@@ -25,3 +25,36 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const ADD_EVENT = gql`
+  mutation addEvent(
+      $eventName: String!,
+      $message: String,
+      $date: String!,
+      $time: String!,
+      $location: String! ) {
+    addEvent(
+        eventName: $eventName,
+        message: $message,
+        date: $date,
+        time: $time,
+        location: $location
+      ) {
+        _id
+    eventName
+    location
+    host {
+      firstName
+      lastName
+      email
+    }
+    guests {
+      firstName
+    }
+    dishes {
+      dishName
+    }
+  }
+  
+}
+`;
