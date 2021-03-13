@@ -15,14 +15,12 @@ const eventSchema = new Schema(
       trim: true
     },
     date: {
-      type: Date,
-      required: true,
-      default: new Date()
+      type: String,
+      required: true
     },
     time: {
-      type: Date,
-      required: true,
-      default: new Date()
+      type: String,
+      required: true
     },
     location: {
       type: String,
@@ -36,8 +34,7 @@ const eventSchema = new Schema(
     },
     guests: [{
       type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
+      ref: 'User'
     }],
     dishes: [dishSchema]
   },

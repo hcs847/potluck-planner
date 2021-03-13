@@ -68,7 +68,7 @@ const resolvers = {
 
     addEvent: async (obj, args, context) => {
       if (context.user) {
-        const event = await Event.create({ ...args, host: context.user.email });
+        const event = await Event.create({ ...args, host: context.user });
 
         return event;
       }
