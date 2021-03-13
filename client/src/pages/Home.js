@@ -12,13 +12,16 @@ const Home = () => {
     // const { events } = state;
     // console.log("events  :", events);
 
+
     useEffect(() => {
         if (data) {
             dispatch({
                 type: UPDATE_EVENTS,
                 events: data.events
             })
+            console.log("Data:  ", data);
         }
+
     }, [data, loading, dispatch]);
 
     const events = state?.events || [];

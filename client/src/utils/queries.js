@@ -6,7 +6,7 @@ query events {
         eventName
         date
         time
-        host
+        
     }
 }
 `;

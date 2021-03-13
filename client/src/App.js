@@ -15,7 +15,7 @@ import Login from './pages/Login';
 import Nav from './components/Nav';
 
 const client = new ApolloClient({
-  uri: 'http:lllocalhost:300llgraphql'
+  uri: '/graphql'
 });
 
 function App() {
