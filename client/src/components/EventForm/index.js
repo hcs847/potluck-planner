@@ -80,12 +80,18 @@ const EventForm = () => {
     }
 
     return (
+<<<<<<< HEAD
         <>
             <form onSubmit={handleSubmitEventForm}>
+=======
+        <div class="potluckbackground">
+            <div class="potluckorange">
+            <form onSubmit={handleSubmitForm}>
+>>>>>>> feature/styling
                 <div>
-                    <label htmlFor="eventName">Event Name:</label>
-                    <input
-                        placeholder="Event's name"
+                    <label class="potluckform" htmlFor="eventName">Event Name:</label>
+                    <input class="forminput"
+                        placeholder="Name Your Event"
                         name="eventName"
                         type="text"
                         id="eventName"
@@ -94,9 +100,9 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="message">Welcome message for guests</label>
-                    <textarea
-                        placeholder="Welcome message:"
+                    <label class="potluckform" htmlFor="message">Welcome Message for Guests: </label>
+                    <textarea class="forminput"
+                        placeholder="Leave a Message for Your Guests:"
                         name="message"
                         type="text"
                         id="message"
@@ -105,9 +111,9 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="date">Event date:</label>
-                    <input
-                        placeholder="Event's date"
+                    <label class="potluckform" htmlFor="date">Event date: </label>
+                    <input class="forminput"
+                        placeholder="Event's Date"
                         name="date"
                         type="date"
                         id="date"
@@ -116,9 +122,9 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="time">Time:</label>
-                    <input
-                        placeholder="Event's time"
+                    <label class="potluckform" htmlFor="time">Time: </label>
+                    <input class="forminput"
+                        placeholder="Event's Time"
                         name="time"
                         type="time"
                         id="time"
@@ -127,15 +133,16 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="location">Location:</label>
-                    <input
-                        placeholder="Event's location"
+                    <label class="potluckform" htmlFor="location">Location: </label>
+                    <input class="forminput"
+                        placeholder="Enter the Location"
                         name="location"
                         type="text"
                         id="location"
                         onChange={handleChangeEventForm}
                     />
                 </div>
+<<<<<<< HEAD
                 <br />
                 {!eventId && (
                     <button style={{ fontWeight: '700' }}
@@ -186,6 +193,72 @@ const EventForm = () => {
                 </Link>
             )}
         </>
+=======
+
+                <p class="potluckformheader" style={{ fontWeight: '700' }}>Guests to Invite:</p>
+                {guestInputFields.map(guestInputField => (
+                    <div key={guestInputField.id}>
+                        <label class="potluckform" htmlFor="guestName">Guest Name: </label>
+                        <input class="forminput"
+                            placeholder="Enter Their Name"
+                            name="guestName"
+                            type="name"
+                            value={guestInputField.guestName}
+                            onChange={(e) => handleChangeInputFields(guestInputField.id, e, guestInputFields, setGuestInputFields)}
+                        />
+                        <br />
+
+                        <label class="potluckform" htmlFor="guestEmail">Guest Email: </label>
+                        <input class="forminput"
+                            placeholder="Enter Their Email"
+                            name="guestEmail"
+                            type="email"
+                            value={guestInputField.guestEmail}
+                            onChange={(e) => handleChangeInputFields(guestInputField.id, e, guestInputFields, setGuestInputFields)}
+                        />
+                        < br />
+                        <button class="btn" onClick={(e) => handleAddInputFields(e, setGuestInputFields, guestInputFields, 'guestName', 'guestEmail')}> + Add Guests </button>
+                        {/* removing guest input fields only onClick */}
+                        <button class="btn" onClick={() => handleRemoveInputFields(guestInputField.id, setGuestInputFields, guestInputFields)}> - Remove Guests </button>
+                    </div>
+                ))}
+
+                <p class="potluckformheader" style={{ fontWeight: '700' }}>Dishes to Share:</p>
+
+                {dishInputFields.map(dishInputField => (
+                    <div key={dishInputField.id}>
+                        <label class="potluckform" htmlFor="dishType">Dish Type: </label>
+                        <input class="forminput"
+                            placeholder="Enter the Dish Type"
+                            name="dishType"
+                            type="text"
+                            value={dishInputField.dishType}
+                            onChange={(e) => handleChangeInputFields(dishInputField.id, e, dishInputFields, setDishInputFields)}
+                        />
+
+                        <label class="potluckform" htmlFor="dishDescription"> Dish Description: </label>
+                        <input class="forminput"
+                            placeholder="Describe the Dish"
+                            name="dishDescription"
+                            type="text"
+                            value={dishInputField.dishDescription}
+                            onChange={(e) => handleChangeInputFields(dishInputField.id, e, dishInputFields, setDishInputFields)}
+                        />
+                        <button class="btn" onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType', 'dishDescription')}> + Add Dishes </button>
+                        {/* removing dish input fields only onClick */}
+                        <button class="btn" onClick={() => handleRemoveInputFields(dishInputField.id, setDishInputFields, dishInputFields)}> - Remove Dishes </button>
+                    </div>
+                ))}
+                <br />
+                <button class="submitbutton"
+                    type="submit"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+        </div>
+>>>>>>> feature/styling
     )
 }
 

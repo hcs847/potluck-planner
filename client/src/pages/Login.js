@@ -32,10 +32,11 @@ const Login = (event) => {
 
     return (
         <>
-            <h2>Sign in</h2>
+            <div class="loginbackground">
+            <h2>Sign In</h2>
             <form onSubmit={handleFormSubmit}>
                 <div>
-                    <label htmlFor="email">Email address</label>
+                    <label htmlFor="email">Email: </label>
                     <input
                         placeholder='youremail@email.com'
                         name='email'
@@ -61,13 +62,14 @@ const Login = (event) => {
 
                 }
                 <div>
-                    <button type='submit'>Sign in</button>
+                    <button type='submit'>Sign In</button>
                 </div>
             </form>
             <br />
             <div>
-                New to Potluck Planner?
-                <Link to='/signup'>Join Now</Link>
+                New to Potluck Planner? 
+                <Link to='/signup'> Join Now</Link>
+            </div>
             </div>
         </>
     )

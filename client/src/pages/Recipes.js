@@ -41,6 +41,7 @@ const Recipes = () => {
 
     return (
         <>
+        <div class="recipesbackground">
             <h1 style={{ textAlign: 'center' }}>Inspiration</h1>
             < SearchForm style={{ margin: '0 auto' }} onSearch={handleSearch} search={search} onSubmit={handleSubmit} />
             <div style={{ display: 'flex', justifyContent: "space-between", flexWrap: 'wrap', maxWidth: '75vw', margin: '0 auto' }}>
@@ -53,6 +54,7 @@ const Recipes = () => {
                 ))
                 }
             </div>
+        </div>
         </>
     )
 }

@@ -33,8 +33,10 @@ const Home = () => {
 
     return (
         <>
+        <div class="eventbackground">
+        <div class="eventorange">
             <h2>Your Events</h2>
-            <ul style={{ listStyle: "none" }}>
+            <ul class="eventlist" style={{ listStyle: "none" }}>
                 {events.map(event => (
                     <Link key={event._id} to={`/event/${event._id}`}>
                         <li style={{ textDecoration: "none", fontWeight: "bolder" }}>{event.eventName}</li>
@@ -42,6 +44,8 @@ const Home = () => {
 
                 ))}
             </ul>
+            </div>
+        </div>
 
 
         </>
