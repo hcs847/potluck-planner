@@ -20,11 +20,26 @@ type User {
   userDiet: [String]
 }
 
-type Dish {
+input GuestInput {
   _id: ID
+  firstName: String
+  lastName: String
+  email: String
+  userDiet: [String]
+}
+
+type Dish {
+  provider: String
   dishName: String
-  type: String
-  price: Int
+  dishType: String
+  quantity: Int
+  dishDiet: String
+}
+
+input DishInput {
+  provider: String
+  dishName: String
+  dishType: String
   quantity: Int
   dishDiet: String
 }
@@ -36,8 +51,8 @@ type Event {
   date: String
   time: String
   location: String
-  host: User
-  guests: [User]
+  host: ID
+  guests: [ID]
   guestCount: Int
   dishes: [Dish]
 }
@@ -50,14 +65,10 @@ type Auth {
 type Query {
 
   me: Me
-
   users: [User]
-
   events: [Event]
-
   user(email: String!): User
-
-  event(_id: String): [Event]
+  event(_id: String): Event
 }
 
 type Mutation {
@@ -72,14 +83,23 @@ type Mutation {
     userDiet: String
     ): Auth
 
+  updateMe(
+    email: String,
+    password: String,
+    firstName: String,
+    lastName: String,
+    userDiet: String
+    ): User
+
+  deleteMe: User
+
   addEvent(
     eventName: String!,
     message: String,
     date: String,
     time: String,
     location: String,
-    guests:[String],
-    dishes:[String]
+    dishes: [DishInput]
     ): Event
 
   addDish(
@@ -91,6 +111,8 @@ type Mutation {
   ): Event
 
   addGuest(eventId: ID!, email:String!): Event
+
+  deleteEvent(eventId: ID!): Event
 }
 `;
 

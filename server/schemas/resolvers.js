@@ -66,10 +66,37 @@ const resolvers = {
       return { token, user };
     },
 
+    updateMe: async (obj, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { ...args },
+          { new: true }
+        );
+        return updatedUser;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    deleteMe: async (obj, args, context) => {
+      if (context.user) {
+        const deletedUser = await User.findOneAndDelete(
+          { _id: context.user._id }
+        );
+        return deletedUser;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
     addEvent: async (obj, args, context) => {
       if (context.user) {
-        const host = await User.findOne({ _id: context.user._id })
-        const event = await Event.create({ ...args, host: host });
+        const guestEmails = args.dishes.map(provider => provider.provider);
+        const guests = await User.find({ email: guestEmails });
+        const guestIds = guests.map(guest => guest._id);
+
+        const event = await Event.create({ ...args, guests: guestIds, host: context.user._id });
 
         return event;
       }
@@ -77,27 +104,13 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addDish: async (obj, {
-      eventId,
-      dishName,
-      type,
-      quantity,
-      dishDiet }, context) => {
+    addDish: async (obj, args, context) => {
+      console.log(args);
       if (context.user) {
         const updatedEvent = await Event.findOneAndUpdate(
-          { _id: eventId },
-          {
-            $push: {
-              dishes: {
-                dishName,
-                provider: context.user._id,
-                type,
-                quantity,
-                dishDiet
-              }
-            }
-          },
-          { new: true, runValidators: true }
+          { _id: args.eventId },
+          { $push: { dishes: { ...args } } },
+          { new: true }
         );
 
         return updatedEvent;
@@ -108,16 +121,29 @@ const resolvers = {
 
     addGuest: async (obj, { eventId, email }, context) => {
       if (context.user) {
+        const guest = await User.findOne({ email: email })
         const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
-          { $addToSet: { guests: { email } } },
+          { $addToSet: { guests: guest._id } },
           { new: true });
 
         return updatedEvent;
       }
 
       throw new AuthenticationError('You need to be logged in!');
+    },
+
+    deleteEvent: async (obj, args, context) => {
+      if (context.user) {
+        const deletedEvent = await Event.findOneAndDelete(
+          { _id: args.eventId }
+        );
+        return deletedEvent;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
     }
+
   }
 };
 
