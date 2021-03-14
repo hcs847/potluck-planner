@@ -3,35 +3,25 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const dishSchema = new Schema({
-  name: {
+  provider: {
     type: String,
-    required: true,
-    unique: true,
+    required: true
+  },
+  dishName: {
+    type: String,
     trim: true
   },
-  description: {
+  dishType: {
     type: String
-  },
-  image: {
-    type: String
-  },
-  price: {
-    type: Number,
-    required: true,
-    min: 0.99
   },
   quantity: {
     type: Number,
-    min: 0,
-    default: 0
+    min: 1,
+    default: 1
   },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category',
-    required: true
+  dishDiet: {
+    type: String
   }
 });
 
-const Dish = mongoose.model('Dish', dishSchema);
-
-module.exports = Dish;
+module.exports = dishSchema;

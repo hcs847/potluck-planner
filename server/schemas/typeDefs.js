@@ -1,60 +1,119 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type Category {
-    _id: ID
-    name: String
-  }
 
-  type Product {
-    _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    category: Category
-  }
+type Me {
+  _id: ID
+  firstName: String
+  lastName: String
+  email: String
+  userDiet: [String]
+  guestEvents: [Event]
+  hostEvents: [Event]
+}
 
-  type Order {
-    _id: ID
-    purchaseDate: String
-    products: [Product]
-  }
+type User {
+  _id: ID
+  firstName: String
+  lastName: String
+  email: String
+  userDiet: [String]
+}
 
-  type User {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    orders: [Order]
-  }
+input GuestInput {
+  _id: ID
+  firstName: String
+  lastName: String
+  email: String
+  userDiet: [String]
+}
 
-  type Auth {
-    token: ID
-    user: User
-  }
+type Dish {
+  provider: String
+  dishName: String
+  dishType: String
+  quantity: Int
+  dishDiet: String
+}
 
-  type Query {
-    categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
-    user: User
-    order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
-  }
+input DishInput {
+  provider: String
+  dishName: String
+  dishType: String
+  quantity: Int
+  dishDiet: String
+}
 
-  type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
-    login(email: String!, password: String!): Auth
-  }
+type Event {
+  _id: ID
+  eventName: String
+  message: String
+  date: String
+  time: String
+  location: String
+  host: ID
+  guests: [ID]
+  guestCount: Int
+  dishes: [Dish]
+}
 
-  type Checkout {
-    session: ID
-  }
+type Auth {
+  token: ID!
+  user: User
+}
+
+type Query {
+
+  me: Me
+  users: [User]
+  events: [Event]
+  user(email: String!): User
+  event(_id: String): Event
+}
+
+type Mutation {
+
+  login(email: String!, password: String!): Auth
+
+  addUser(
+    email: String!,
+    password: String!,
+    firstName: String!,
+    lastName: String!,
+    userDiet: String
+    ): Auth
+
+  updateMe(
+    email: String,
+    password: String,
+    firstName: String,
+    lastName: String,
+    userDiet: String
+    ): User
+
+  deleteMe: User
+
+  addEvent(
+    eventName: String!,
+    message: String,
+    date: String,
+    time: String,
+    location: String,
+    dishes: [DishInput]
+    ): Event
+
+  addDish(
+    eventId: ID!,
+    dishName: String!,
+    type: String,
+    quantity: Int,
+    dishDiet: [String]
+  ): Event
+
+  addGuest(eventId: ID!, email:String!): Event
+
+  deleteEvent(eventId: ID!): Event
+}
 `;
 
 module.exports = typeDefs;

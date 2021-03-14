@@ -1,40 +1,43 @@
 const mongoose = require('mongoose');
-
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 
-const userSchema = new Schema({
-  firstName: {
-    type: String,
-    required: true,
-    trim: true
+const userSchema = new Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, 'Must match an email address!']
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 5
+    },
+    userDiet: [
+      {
+        type: String,
+        enum: ['None', 'Vegan', 'Vegetarian', 'Kosher', 'Halal', 'Dairy-free', 'Nut-free', 'Gluten-free'],
+      }
+    ]
   },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 5
-  },
-  specialties: {
-    type: Schema.Types.name,
-    ref: 'Dish',
-    required: true
-  },
-  favorites: {
-    type: Schema.Types.name,
-    ref: 'Dish',
-    required: true
+  {
+    toJSON: {
+      virtuals: true
+    }
   }
-});
+);
 
 // hash and salt passwords with bcrypt
 userSchema.pre('save', async function (next) {
