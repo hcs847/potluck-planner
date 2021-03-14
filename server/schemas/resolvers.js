@@ -1,20 +1,20 @@
-const { User, Event } = require('../models');
+const { User, Event, Dish } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const { events } = require('../models/User');
 
 const resolvers = {
 
   Query: {
 
     me: async (obj, args, context) => {
+
       if (context.user) {
+
         const userData = await User.findOne({ _id: context.user._id })
           .select('-__v -password');
-        const gEvents = await Event.find({ guests: { _id: context.user._id } });
-        const hEvents = await Event.find({ host: { _id: context.user._id } });
 
-
-        return { ...userData, guestEvents: gEvents, hostEvents: hEvents };
+        return userData;
       }
 
       throw new AuthenticationError('Not logged in');
@@ -30,18 +30,30 @@ const resolvers = {
     },
 
     user: async (obj, { email }) => {
-      return User.findOne({ email })
+      return User.findOne({ email: email })
         .select('-__v -password');
     },
 
-    event: async (obj, { _id }) => {
-      return Event.findOne({ _id });
+    event: async (obj, { _id }, context) => {
+      const event = Event.findOne({ _id: _id });
+      if (event.guests.includes(context.user.email) || event.host === context.user._id) {
+        return event;
+      }
+    },
+
+    dishes: async () => {
+      return Dish.find();
+    },
+
+    dish: async (obj, { _id }) => {
+      return Dish.findOne({ _id: _id });
     }
   },
 
   Mutation: {
 
     login: async (obj, { email, password }) => {
+
       const user = await User.findOne({ email });
 
       if (!user) {
@@ -53,9 +65,7 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
-
       const token = signToken(user);
-
       return { token, user };
     },
 
@@ -67,12 +77,13 @@ const resolvers = {
     },
 
     updateMe: async (obj, args, context) => {
+
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { ...args },
+          args,
           { new: true }
-        );
+        ).select('-__v -password');
         return updatedUser;
       }
 
@@ -83,7 +94,7 @@ const resolvers = {
       if (context.user) {
         const deletedUser = await User.findOneAndDelete(
           { _id: context.user._id }
-        );
+        ).select('-__v -password');
         return deletedUser;
       }
 
@@ -92,28 +103,32 @@ const resolvers = {
 
     addEvent: async (obj, args, context) => {
       if (context.user) {
-        const guestEmails = args.dishes.map(provider => provider.provider);
-        const guests = await User.find({ email: guestEmails });
-        const guestIds = guests.map(guest => guest._id);
-
-        const event = await Event.create({ ...args, guests: guestIds, host: context.user._id });
-
+        const dishes = await Dish.insertMany(args.dishes);
+        const dishIds = dishes.map(dish => dish._id);
+        const event = await Event.create({
+          eventName: args.eventName,
+          message: args.message,
+          date: args.date,
+          time: args.time,
+          location: args.location,
+          guests: args.guests,
+          dishes: dishIds,
+          host: context.user._id
+        });
         return event;
       }
 
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addDish: async (obj, args, context) => {
-      console.log(args);
+    updateDish: async (obj, args, context) => {
       if (context.user) {
-        const updatedEvent = await Event.findOneAndUpdate(
-          { _id: args.eventId },
-          { $push: { dishes: { ...args } } },
-          { new: true }
-        );
+        const updatedDish = await Dish.findOneAndUpdate(
+          { _id: args.dishId },
+          { ...args, provider: context.user._id },
+          { new: true });
 
-        return updatedEvent;
+        return updatedDish;
       }
 
       throw new AuthenticationError('You need to be logged in!');
@@ -121,7 +136,7 @@ const resolvers = {
 
     addGuest: async (obj, { eventId, email }, context) => {
       if (context.user) {
-        const guest = await User.findOne({ email: email })
+        const guest = await User.findOne({ email: email }).select('-__v -password');
         const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
           { $addToSet: { guests: guest._id } },
