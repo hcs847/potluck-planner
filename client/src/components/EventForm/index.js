@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_EVENT, ADD_DISH } from '../../utils/mutations';
 import DishForm from '../DishForm';
+import BasicEventForm from '../BasicEventForm';
 
 
 
@@ -52,7 +53,6 @@ const EventForm = () => {
         // dishType: ''
     });
 
-
     // handling change for Dishes within form
     const handleChangeDishForm = (event) => {
         const { name, value } = event.target;
@@ -82,61 +82,9 @@ const EventForm = () => {
     return (
         <>
             <form onSubmit={handleSubmitEventForm}>
-                <div>
-                    <label htmlFor="eventName">Event Name:</label>
-                    <input
-                        placeholder="Event's name"
-                        name="eventName"
-                        type="text"
-                        id="eventName"
-                        onChange={handleChangeEventForm}
-                    />
-                </div>
-                <br />
-                <div>
-                    <label htmlFor="message">Welcome message for guests</label>
-                    <textarea
-                        placeholder="Welcome message:"
-                        name="message"
-                        type="text"
-                        id="message"
-                        onChange={handleChangeEventForm}
-                    />
-                </div>
-                <br />
-                <div>
-                    <label htmlFor="date">Event date:</label>
-                    <input
-                        placeholder="Event's date"
-                        name="date"
-                        type="date"
-                        id="date"
-                        onChange={handleChangeEventForm}
-                    />
-                </div>
-                <br />
-                <div>
-                    <label htmlFor="time">Time:</label>
-                    <input
-                        placeholder="Event's time"
-                        name="time"
-                        type="time"
-                        id="time"
-                        onChange={handleChangeEventForm}
-                    />
-                </div>
-                <br />
-                <div>
-                    <label htmlFor="location">Location:</label>
-                    <input
-                        placeholder="Event's location"
-                        name="location"
-                        type="text"
-                        id="location"
-                        onChange={handleChangeEventForm}
-                    />
-                </div>
-                <br />
+                <BasicEventForm handleChange={handleChangeEventForm} basicEvent={eventState} />
+
+                {/* if there's no eventId yet, display submit button for basic details of event */}
                 {!eventId && (
                     <button style={{ fontWeight: '700' }}
                         type="submit"

@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_EVENTS } from '../utils/queries';
+import DishForm from '../components/DishForm';
 
 
 const Event = () => {
@@ -18,7 +19,7 @@ const Event = () => {
     console.log("id: ", typeof (id), id, singleEvent());
 
     return (
-        <div>
+        <>
             {singleEvent().map(event => (
                 <ul key={event._id} style={{ listStyle: "none" }}>
                     <li style={{ fontWeight: "bolder" }}>{event.eventName}</li>
@@ -42,8 +43,10 @@ const Event = () => {
                 </ul>
             ))}
 
+            <button style={{ margin: '1rem' }}>Update form</button>
 
-        </div>
+
+        </>
     )
 }
 
