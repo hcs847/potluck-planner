@@ -7,15 +7,15 @@ const Nav = () => {
         <nav class="navbar navbar-light navbar-dark imageWrapper">
             <ul style={{ listStyle: 'none', display: "flex", gap: "1rem" }}>
                 <Link to='/home'>
-                    <li>Home</li>
+                    <li class="navlink">Home</li>
                 </Link>
                 <Link to='/potluck'>
-                    <li>Potluck Plannning</li>
+                    <li class="navlink">Potluck Planner</li>
                 </Link>
                 <Link to='/recipes'>
-                    <li>Recipes</li>
+                    <li class="navlink">Recipes</li>
                 </Link>
-                <li>Logout</li>
+                <li class="navlink">Logout</li>
             </ul>
         </nav>
     )

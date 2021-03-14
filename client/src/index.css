@@ -13,7 +13,7 @@ img {
   width: 100%;
 }
 
-nav.imageWrapper div.img {
+/*nav.imageWrapper div.img {
   position: absolute;
   top: 0;
   left: 0;
@@ -22,7 +22,69 @@ nav.imageWrapper div.img {
   z-index: 0;
   max-height: 70vh;
   background-size: cover;
-  background-image: url('../public/images/Nav.jpg');
+  background-image: url('../src/images/Nav.jpg');
+}*/
+
+.navbar {
+  background-image: url('../src/images/Nav.jpg');
+  background-size: cover;
+  position: absolute;
+  max-height: 10vh;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.navlink {
+  font-family: 'Lora', serif;
+  color: navy;
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: .3rem;
+  padding: .5rem;
+}
+
+.navlink:hover {
+  font-weight: bold;
+}
+
+.eventbackground {
+  background-image: url('../src/images/event.jpg');
+  background-size: cover;
+  background-position: fixed;
+}
+
+.eventname {
+  color:#b5510e;
+  background-color: white;
+  padding: .5rem;
+  border-radius: .2rem;
+  font-size: large;
+}
+
+.eventorange {
+  position: relative;
+  padding: 2.2rem;
+  top: 2rem;
+  left: 2rem;
+  right: 2rem;
+  bottom: 2rem;
+  background-color: rgba(235, 125, 52, .75);
+  border-radius: 1rem;
+  max-width: 90vh;
+}
+
+.eventlist {
+  color: navy;
+  line-height: normal;
+  font-size: smaller;
+  columns: 6rem auto;
+}
+
+.loginbackground {
+  background-image: url('../src/images/invites.jpg');
+  background-position: cover;
 }
 
 .container {
@@ -47,17 +109,36 @@ footer a {
 
 h1 {}
 
-h2 {}
+h2 {
+  font-family: 'Lora', serif; 
+  color: white;
+}
 
 h3 {}
 
 .btn {
-  border-radius: 0.8rem;
-  display: block;
+  border-radius: 0.3rem;
   cursor: pointer;
-  margin: 0 0 0.5rem 1rem;
-  padding: 0.5em 1 em;
-  width: 40%;
+  /*margin: 0 0 0 1rem;*/
+  margin: 0 0 0 1rem;
+  /*width: 40%;*/
+  background-color: white;
+  color: #eb7d34;
+  border-color: white;
+}
+
+.btn:hover {
+  font-weight: bold;
+}
+
+.submitbutton {
+  cursor: pointer;
+  background-color: #eb7d34;
+  color: white;
+  border-color:  #eb7d34;
+  font-size: 1.3rem;
+  border-radius: .3rem;
+  margin: 0 0 .8rem 1rem;
 }
 
 nav {
@@ -73,4 +154,8 @@ footer {
 
 footer a {
   font-size: 2rem;
+}
+
+.eventform {
+  background-color: 235, 125, 52, 0.3;
 }

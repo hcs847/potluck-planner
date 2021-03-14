@@ -7,7 +7,7 @@ const Event = ({ event }) => {
     return (
         <div>
             <Link to={`/event/${event.eventId}`}>
-                <li style={{ textDecoration: "none", fontWeight: "bolder" }}>{event.eventName}</li>
+                <li class="eventname" style={{ textDecoration: "none", fontWeight: "bolder" }}>{event.eventName}</li>
             </Link>
 
             <li >{event.date}</li>
@@ -18,7 +18,7 @@ const Event = ({ event }) => {
             )
             )}</li>
             <li><h4 style={{ marginBottom: '0.2rem' }}>Dishes List:</h4>{event.dishes.map(dish => (
-                <li style={{ margin: '0.5rem' }} key={dish.dishId}>{dish.dishType} <button>SignUp</button></li>
+                <li style={{ margin: '0.5rem' }} key={dish.dishId}>{dish.dishType} <button class="btn">Sign Up</button></li>
             )
 
             )}</li>

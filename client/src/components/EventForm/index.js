@@ -68,12 +68,13 @@ const EventForm = () => {
     }
 
     return (
+        <div class="eventform">
         <>
             <form onSubmit={handleSubmitForm}>
                 <div>
-                    <label htmlFor="eventName">Event Name:</label>
+                    <label htmlFor="eventName">Event Name: </label>
                     <input
-                        placeholder="Event's name"
+                        placeholder="Name Your Event"
                         name="eventName"
                         type="text"
                         id="eventName"
@@ -82,9 +83,9 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="message">Welcome message for guests</label>
+                    <label htmlFor="message">Welcome Message for Guests: </label>
                     <textarea
-                        placeholder="Welcome message:"
+                        placeholder="Leave a Message for Your Guests:"
                         name="message"
                         type="text"
                         id="message"
@@ -93,9 +94,9 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="date">Event date:</label>
+                    <label htmlFor="date">Event date: </label>
                     <input
-                        placeholder="Event's date"
+                        placeholder="Event's Date"
                         name="date"
                         type="date"
                         id="date"
@@ -104,9 +105,9 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="time">Time:</label>
+                    <label htmlFor="time">Time: </label>
                     <input
-                        placeholder="Event's time"
+                        placeholder="Event's Time"
                         name="time"
                         type="time"
                         id="time"
@@ -115,9 +116,9 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="location">Location:</label>
+                    <label htmlFor="location">Location: </label>
                     <input
-                        placeholder="Event's location"
+                        placeholder="Enter the Location"
                         name="location"
                         type="text"
                         id="location"
@@ -128,26 +129,26 @@ const EventForm = () => {
                 <p style={{ fontWeight: '700' }}>Guests to Invite:</p>
                 {guestInputFields.map(guestInputField => (
                     <div key={guestInputField.id}>
-                        <label htmlFor="guestName">Guest Name:</label>
+                        <label htmlFor="guestName">Guest Name: </label>
                         <input
-                            placeholder="Guest name"
+                            placeholder="Enter Their Name"
                             name="guestName"
                             type="name"
                             value={guestInputField.guestName}
                             onChange={(e) => handleChangeInputFields(guestInputField.id, e, guestInputFields, setGuestInputFields)}
                         />
 
-                        <label htmlFor="guestEmail">Guest Email:</label>
+                        <label htmlFor="guestEmail">Guest Email: </label>
                         <input
-                            placeholder="Guest Email"
+                            placeholder="Enter Their Email"
                             name="guestEmail"
                             type="email"
                             value={guestInputField.guestEmail}
                             onChange={(e) => handleChangeInputFields(guestInputField.id, e, guestInputFields, setGuestInputFields)}
                         />
-                        <button onClick={(e) => handleAddInputFields(e, setGuestInputFields, guestInputFields, 'guestName', 'guestEmail')}> + Add Guests </button>
+                        <button class="btn" onClick={(e) => handleAddInputFields(e, setGuestInputFields, guestInputFields, 'guestName', 'guestEmail')}> + Add Guests </button>
                         {/* removing guest input fields only onClick */}
-                        <button onClick={() => handleRemoveInputFields(guestInputField.id, setGuestInputFields, guestInputFields)}> - Remove Guests </button>
+                        <button class="btn" onClick={() => handleRemoveInputFields(guestInputField.id, setGuestInputFields, guestInputFields)}> - Remove Guests </button>
                     </div>
                 ))}
 
@@ -155,36 +156,37 @@ const EventForm = () => {
 
                 {dishInputFields.map(dishInputField => (
                     <div key={dishInputField.id}>
-                        <label htmlFor="dishType">Dish Type:</label>
+                        <label htmlFor="dishType">Dish Type: </label>
                         <input
-                            placeholder="Dish Type"
+                            placeholder="Enter the Dish Type"
                             name="dishType"
                             type="text"
                             value={dishInputField.dishType}
                             onChange={(e) => handleChangeInputFields(dishInputField.id, e, dishInputFields, setDishInputFields)}
                         />
 
-                        <label htmlFor="dishDescription">Dish Description:</label>
+                        <label htmlFor="dishDescription">Dish Description: </label>
                         <input
-                            placeholder="Dish Description"
+                            placeholder="Describe the Dish"
                             name="dishDescription"
                             type="text"
                             value={dishInputField.dishDescription}
                             onChange={(e) => handleChangeInputFields(dishInputField.id, e, dishInputFields, setDishInputFields)}
                         />
-                        <button onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType', 'dishDescription')}> + Add Dishes </button>
+                        <button class="btn" onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType', 'dishDescription')}> + Add Dishes </button>
                         {/* removing dish input fields only onClick */}
-                        <button onClick={() => handleRemoveInputFields(dishInputField.id, setDishInputFields, dishInputFields)}> - Remove Dishes </button>
+                        <button class="btn" onClick={() => handleRemoveInputFields(dishInputField.id, setDishInputFields, dishInputFields)}> - Remove Dishes </button>
                     </div>
                 ))}
                 <br />
-                <button
+                <button class="submitbutton"
                     type="submit"
                 >
                     Submit
                 </button>
             </form>
         </>
+        </div>
     )
 }
 
