@@ -68,12 +68,12 @@ const EventForm = () => {
     }
 
     return (
-        <div class="eventform">
-        <>
+        <div class="potluckbackground">
+            <div class="potluckorange">
             <form onSubmit={handleSubmitForm}>
                 <div>
-                    <label htmlFor="eventName">Event Name: </label>
-                    <input
+                    <label class="potluckform" htmlFor="eventName">Event Name:</label>
+                    <input class="forminput"
                         placeholder="Name Your Event"
                         name="eventName"
                         type="text"
@@ -83,8 +83,8 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="message">Welcome Message for Guests: </label>
-                    <textarea
+                    <label class="potluckform" htmlFor="message">Welcome Message for Guests: </label>
+                    <textarea class="forminput"
                         placeholder="Leave a Message for Your Guests:"
                         name="message"
                         type="text"
@@ -94,8 +94,8 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="date">Event date: </label>
-                    <input
+                    <label class="potluckform" htmlFor="date">Event date: </label>
+                    <input class="forminput"
                         placeholder="Event's Date"
                         name="date"
                         type="date"
@@ -105,8 +105,8 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="time">Time: </label>
-                    <input
+                    <label class="potluckform" htmlFor="time">Time: </label>
+                    <input class="forminput"
                         placeholder="Event's Time"
                         name="time"
                         type="time"
@@ -116,8 +116,8 @@ const EventForm = () => {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="location">Location: </label>
-                    <input
+                    <label class="potluckform" htmlFor="location">Location: </label>
+                    <input class="forminput"
                         placeholder="Enter the Location"
                         name="location"
                         type="text"
@@ -126,38 +126,40 @@ const EventForm = () => {
                     />
                 </div>
 
-                <p style={{ fontWeight: '700' }}>Guests to Invite:</p>
+                <p class="potluckformheader" style={{ fontWeight: '700' }}>Guests to Invite:</p>
                 {guestInputFields.map(guestInputField => (
                     <div key={guestInputField.id}>
-                        <label htmlFor="guestName">Guest Name: </label>
-                        <input
+                        <label class="potluckform" htmlFor="guestName">Guest Name: </label>
+                        <input class="forminput"
                             placeholder="Enter Their Name"
                             name="guestName"
                             type="name"
                             value={guestInputField.guestName}
                             onChange={(e) => handleChangeInputFields(guestInputField.id, e, guestInputFields, setGuestInputFields)}
                         />
+                        <br />
 
-                        <label htmlFor="guestEmail">Guest Email: </label>
-                        <input
+                        <label class="potluckform" htmlFor="guestEmail">Guest Email: </label>
+                        <input class="forminput"
                             placeholder="Enter Their Email"
                             name="guestEmail"
                             type="email"
                             value={guestInputField.guestEmail}
                             onChange={(e) => handleChangeInputFields(guestInputField.id, e, guestInputFields, setGuestInputFields)}
                         />
+                        < br />
                         <button class="btn" onClick={(e) => handleAddInputFields(e, setGuestInputFields, guestInputFields, 'guestName', 'guestEmail')}> + Add Guests </button>
                         {/* removing guest input fields only onClick */}
                         <button class="btn" onClick={() => handleRemoveInputFields(guestInputField.id, setGuestInputFields, guestInputFields)}> - Remove Guests </button>
                     </div>
                 ))}
 
-                <p style={{ fontWeight: '700' }}>Dishes to Share:</p>
+                <p class="potluckformheader" style={{ fontWeight: '700' }}>Dishes to Share:</p>
 
                 {dishInputFields.map(dishInputField => (
                     <div key={dishInputField.id}>
-                        <label htmlFor="dishType">Dish Type: </label>
-                        <input
+                        <label class="potluckform" htmlFor="dishType">Dish Type: </label>
+                        <input class="forminput"
                             placeholder="Enter the Dish Type"
                             name="dishType"
                             type="text"
@@ -165,8 +167,8 @@ const EventForm = () => {
                             onChange={(e) => handleChangeInputFields(dishInputField.id, e, dishInputFields, setDishInputFields)}
                         />
 
-                        <label htmlFor="dishDescription">Dish Description: </label>
-                        <input
+                        <label class="potluckform" htmlFor="dishDescription"> Dish Description: </label>
+                        <input class="forminput"
                             placeholder="Describe the Dish"
                             name="dishDescription"
                             type="text"
@@ -185,7 +187,7 @@ const EventForm = () => {
                     Submit
                 </button>
             </form>
-        </>
+        </div>
         </div>
     )
 }
