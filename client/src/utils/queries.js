@@ -17,3 +17,20 @@ query events {
   
 `;
 
+export const QUERY_EVENT = gql`
+query event($_id:String!) {
+    event(_id: $_id){
+    _id
+    eventName
+    message
+    date
+    time
+    location
+    host
+    guests
+    dishes
+  }
+  }
+  
+`;
+

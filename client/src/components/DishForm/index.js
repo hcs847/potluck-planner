@@ -1,9 +1,11 @@
 import React from 'react'
 
-function DishForm({ handleChange, handleSubmit, dish }) {
+function DishForm({ onBlurDish, handleChange, setDishName, dishsName, dishes }) {
     return (
-
-        <form onSubmit={handleSubmit}>
+        <>
+            {/* {
+                dishes.map(dish => (
+                    <div key={dish.dishName}> */}
             {/* <label htmlFor="dishType">Dish Type:</label>
     <input
         placeholder="Dish Type"
@@ -18,19 +20,14 @@ function DishForm({ handleChange, handleSubmit, dish }) {
                 placeholder="Dish Name"
                 name="dishName"
                 type="text"
-                value={dish.dishName}
-                onChange={handleChange}
+                value={dishsName}
+                onChange={e => setDishName(e.target.value)}
+            // onBlur={onBlurDish}
             />
-
-            <button
-                type="submit"
-            >
-                Update dish/ add another dish
-</button>
-        </form>
-
+        </>
     )
 }
+
 
 export default DishForm;
 
