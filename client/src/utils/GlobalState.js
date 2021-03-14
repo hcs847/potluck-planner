@@ -9,12 +9,17 @@ const GlobalProvider = ({ value = [], ...props }) => {
     const [state, dispatch] = useAppReducer({
         events: [
             {
-                eventId: 1001,
+                _id: 1001,
                 eventName: "Office Party",
                 message: "Welcome to the annual party",
                 date: "04-01-2021",
                 time: "12:00 PM",
                 location: "The Kitchen",
+                host: {
+                    firstName: "Test",
+                    lastName: "Tester",
+                    email: "tester@email.com"
+                },
                 dishes: [
                     { dishDescription: "", dishType: "Mains", dishId: 2001 },
                     { dishDescription: "", dishType: "Sides", dishId: 2002 },
@@ -46,7 +51,15 @@ const GlobalProvider = ({ value = [], ...props }) => {
     })
 
     // test
-    console.log(state.events);
+    console.log("state.events: ", state.events);
+
+    // // actions
+    // function addEvent(event) {
+    //     dispatch({
+    //         type: 'ADD_EVENT',
+    //         payload: event
+    //     });
+    // }
 
     return <Provider value={[state, dispatch]} {...props} />;
 };

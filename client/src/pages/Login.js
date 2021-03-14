@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
+import { LOGIN_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 
 const Login = (event) => {
     const [formState, setFormState] = useState({ email: '', password: '' });
-    // add useMutation
-    // ===============
+    const [login, { error }] = useMutation(LOGIN_USER);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        console.log(name, value);
+        // console.log(name, value);
         setFormState({
             ...formState,
             [name]: value
         });
     };
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        // connect to mutations
-        // ====================
-        console.log('submitted');
+        try {
+            const mutationResponse = await login({ variables: { email: formState.email, password: formState.password } })
+            const token = mutationResponse.data.login.token;
+            Auth.login(token);
+            // console.log("Loggedin");
+        } catch (e) {
+            console.log(e)
+        }
     };
 
     return (
@@ -47,7 +54,12 @@ const Login = (event) => {
                         onChange={handleChange}
                     />
                 </div>
-                {/* ERROR handling ================= */}
+                {
+                    error ? <div>
+                        <p>The provided credentials are incorrect</p>
+                    </div> : null
+
+                }
                 <div>
                     <button type='submit'>Sign in</button>
                 </div>
