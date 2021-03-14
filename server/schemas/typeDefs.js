@@ -57,7 +57,7 @@ type Query {
 
   user(email: String!): User
 
-  event(_id: String): [Event]
+  event(_id: String): Event
 }
 
 type Mutation {
