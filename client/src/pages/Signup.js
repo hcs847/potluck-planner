@@ -8,7 +8,7 @@ const Signup = () => {
     const [formState, setFormState] = useState({ firstName: '', lastName: '', email: '', password: '' });
 
     // useMutation hook plus destructuring error to alret user of issues
-    const [addUser, { error }] = useMutation(ADD_USER);
+    const [addUser] = useMutation(ADD_USER);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();

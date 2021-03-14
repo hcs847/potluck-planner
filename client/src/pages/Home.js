@@ -1,14 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useGlobalContext } from '../utils/GlobalState';
+// import { useGlobalContext } from '../utils/GlobalState';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_EVENTS } from '../utils/queries';
-import { UPDATE_EVENTS } from '../utils/actions';
+// import { UPDATE_EVENTS } from '../utils/actions';
 
 
 const Home = () => {
-    const { loading, data } = useQuery(QUERY_EVENTS);
-    const [state, dispatch] = useGlobalContext();
+    const { data } = useQuery(QUERY_EVENTS);
+    // const [state, dispatch] = useGlobalContext();
     // const { events } = state;
     // console.log("events  :", events);
 

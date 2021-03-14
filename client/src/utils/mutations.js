@@ -54,21 +54,18 @@ export const ADD_EVENT = gql`
     dishes {
       dishName
     }
-  }
-  
+  } 
 }
 `;
 
 export const ADD_DISH = gql`
   mutation addDish(
       $eventId: ID!,
-      $dishName: String!,
-  	  $dishType: String
+      $dishName: String!
      ) {
     addDish(
         eventId: $eventId,
-        dishName: $dishName,
-      	dishType: $dishType,
+        dishName: $dishName
       ) {
         _id
     eventName
@@ -83,7 +80,7 @@ export const ADD_DISH = gql`
     }
     dishes {
       dishName
-      dishType
+      
     }
       }
 }

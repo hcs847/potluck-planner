@@ -3,7 +3,7 @@ import {
     ADD_DISH,
     UPDATE_EVENTS,
 } from "./actions";
-import React, { useReducer } from 'react';
+import { useReducer } from 'react';
 
 export const reducer = (state, action) => {
     switch (action.type) {

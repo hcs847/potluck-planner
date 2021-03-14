@@ -11,7 +11,7 @@ const Login = (event) => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        console.log(name, value);
+        // console.log(name, value);
         setFormState({
             ...formState,
             [name]: value
@@ -24,7 +24,7 @@ const Login = (event) => {
             const mutationResponse = await login({ variables: { email: formState.email, password: formState.password } })
             const token = mutationResponse.data.login.token;
             Auth.login(token);
-            console.log("Loggedin");
+            // console.log("Loggedin");
         } catch (e) {
             console.log(e)
         }
@@ -54,7 +54,12 @@ const Login = (event) => {
                         onChange={handleChange}
                     />
                 </div>
-                {/* ERROR handling ================= */}
+                {
+                    error ? <div>
+                        <p>The provided credentials are incorrect</p>
+                    </div> : null
+
+                }
                 <div>
                     <button type='submit'>Sign in</button>
                 </div>
