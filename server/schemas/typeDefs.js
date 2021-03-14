@@ -2,46 +2,31 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
-type Me {
-  _id: ID
-  firstName: String
-  lastName: String
-  email: String
-  userDiet: [String]
-  guestEvents: [Event]
-  hostEvents: [Event]
+input DishInput {
+  dishName: String
+  dishType: String
+  quantity: Int
+  dishDiet: [String]
 }
 
 type User {
   _id: ID
+  password: String
   firstName: String
   lastName: String
   email: String
-  userDiet: [String]
-}
-
-input GuestInput {
-  _id: ID
-  firstName: String
-  lastName: String
-  email: String
+  guestEvents: [Event]
+  hostEvents: [Event]
   userDiet: [String]
 }
 
 type Dish {
-  provider: String
+  _id: ID
+  provider: ID
   dishName: String
   dishType: String
   quantity: Int
-  dishDiet: String
-}
-
-input DishInput {
-  provider: String
-  dishName: String
-  dishType: String
-  quantity: Int
-  dishDiet: String
+  dishDiet: [String]
 }
 
 type Event {
@@ -54,7 +39,7 @@ type Event {
   host: ID
   guests: [ID]
   guestCount: Int
-  dishes: [Dish]
+  dishes: [ID]
 }
 
 type Auth {
@@ -64,11 +49,13 @@ type Auth {
 
 type Query {
 
-  me: Me
+  me: User
   users: [User]
   events: [Event]
+  dishes: [Dish]
   user(email: String!): User
-  event(_id: String): Event
+  event(_id: String!): Event
+  dish(_id: String): Dish
 }
 
 type Mutation {
@@ -80,15 +67,14 @@ type Mutation {
     password: String!,
     firstName: String!,
     lastName: String!,
-    userDiet: String
+    userDiet: [String]
     ): Auth
 
   updateMe(
     email: String,
-    password: String,
     firstName: String,
     lastName: String,
-    userDiet: String
+    userDiet: [String]
     ): User
 
   deleteMe: User
@@ -99,16 +85,17 @@ type Mutation {
     date: String,
     time: String,
     location: String,
+    guests: [String],
     dishes: [DishInput]
     ): Event
 
-  addDish(
-    eventId: ID!,
+  updateDish(
+    dishId: String!,
     dishName: String!,
-    type: String,
+    dishType: String,
     quantity: Int,
     dishDiet: [String]
-  ): Event
+  ): Dish
 
   addGuest(eventId: ID!, email:String!): Event
 
