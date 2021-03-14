@@ -33,19 +33,19 @@ const Home = () => {
 
     return (
         <>
-        <div class="eventbackground">
-        <div class="eventorange">
-            <h2>Your Events</h2>
-            <ul class="eventlist" style={{ listStyle: "none" }}>
-                {events.map(event => (
-                    <Link key={event._id} to={`/event/${event._id}`}>
-                        <li style={{ textDecoration: "none", fontWeight: "bolder" }}>{event.eventName}</li>
-                    </Link>
+            <div className="eventbackground">
+                <div className="eventorange">
+                    <h2>Your Events</h2>
+                    <ul className="eventlist" style={{ listStyle: "none" }}>
+                        {events.map(event => (
+                            <Link key={event._id} to={`/event/${event._id}`}>
+                                <li style={{ textDecoration: "none", fontWeight: "bolder" }}>{event.eventName}</li>
+                            </Link>
 
-                ))}
-            </ul>
+                        ))}
+                    </ul>
+                </div>
             </div>
-        </div>
 
 
         </>

@@ -41,20 +41,20 @@ const Recipes = () => {
 
     return (
         <>
-        <div class="recipesbackground">
-            <h1 style={{ textAlign: 'center' }}>Inspiration</h1>
-            < SearchForm style={{ margin: '0 auto' }} onSearch={handleSearch} search={search} onSubmit={handleSubmit} />
-            <div style={{ display: 'flex', justifyContent: "space-between", flexWrap: 'wrap', maxWidth: '75vw', margin: '0 auto' }}>
-                {recipes.map(recipe => (
-                    < Recipe
-                        image={recipe.recipe.image}
-                        url={recipe.recipe.url}
-                        label={recipe.recipe.label}
-                        key={recipe.recipe.uri} />
-                ))
-                }
+            <div className="recipesbackground">
+                <h1 style={{ textAlign: 'center' }}>Inspiration</h1>
+                < SearchForm style={{ margin: '0 auto' }} onSearch={handleSearch} search={search} onSubmit={handleSubmit} />
+                <div style={{ display: 'flex', justifyContent: "space-between", flexWrap: 'wrap', maxWidth: '75vw', margin: '0 auto' }}>
+                    {recipes.map(recipe => (
+                        < Recipe
+                            image={recipe.recipe.image}
+                            url={recipe.recipe.url}
+                            label={recipe.recipe.label}
+                            key={recipe.recipe.uri} />
+                    ))
+                    }
+                </div>
             </div>
-        </div>
         </>
     )
 }

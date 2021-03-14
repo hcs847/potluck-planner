@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
 import { GlobalProvider } from './utils/GlobalState';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import Landing from './pages/Landing';
 import Home from './pages/Home';
 import PlanEvent from './pages/PlanEvent';
@@ -31,7 +31,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div className="App">
-          <img src={logo} style={{ maxWidth: '10%', margin: '0.1rem' }} alt="logo" />
+          {/* <img src={logo} style={{ maxWidth: '10%', margin: '0.1rem' }} alt="logo" /> */}
           <GlobalProvider>
             <Nav />
             <Switch>
