@@ -4,26 +4,24 @@ const { Schema } = mongoose;
 
 const dishSchema = new Schema({
   provider: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true
   },
   dishName: {
     type: String,
     trim: true
   },
-  type: {
-    type: String,
-    enum: ['Main dish', 'Dessert', '']
+  dishType: {
+    type: String
   },
   quantity: {
     type: Number,
-    min: 0,
-    default: 0
+    min: 1,
+    default: 1
   },
-  dishDiet: [{
-    type: String,
-    enum: ['None', 'Vegan', 'Vegetarian', 'Kosher', 'Halal', 'Dairy-free', 'Nut-free', 'Gluten-free']
-  }]
+  dishDiet: {
+    type: String
+  }
 });
 
 module.exports = dishSchema;
