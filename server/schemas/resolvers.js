@@ -22,7 +22,8 @@ const resolvers = {
     },
 
     events: async () => {
-      return Event.find().sort({ date: -1 });
+      return Event.find().sort({ date: -1 })
+        .populate('host dishes');
     },
 
     user: async (obj, { userId }) => {
@@ -30,9 +31,9 @@ const resolvers = {
         .select('-__v -password');
     },
 
-    event: async (obj, { eventId }, context) => {
-      const event = await Event.findOne({ _id: eventId });
-      return event;
+    event: async (obj, { eventId }) => {
+      return await Event.findOne({ _id: eventId })
+        .populate('host dishes');
     },
 
     dishes: async () => {
