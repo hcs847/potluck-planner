@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { ADD_EVENT } from '../../utils/mutations';
-import DishForm from '../DishForm';
-import BasicEventForm from '../BasicEventForm';
+// import DishForm from '../DishForm';
+// import BasicEventForm from '../BasicEventForm';
 import { QUERY_EVENT } from '../../utils/queries';
 
 const EventForm = () => {

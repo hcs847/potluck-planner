@@ -9,16 +9,19 @@ query events {
       date
       time
     location
-   host
+   host {
+       firstName
+   }
     guests
-    dishes 
+    dishes {
+        dishType
+    }
   }
   }
-  
 `;
 
 export const QUERY_EVENT = gql`
-query event($eventId: String!) {
+query event($eventId: ID!) {
     event(eventId: $eventId){
     _id
     eventName
@@ -26,11 +29,28 @@ query event($eventId: String!) {
     date
     time
     location
-    host
+    host {
+        firstName
+        lastName
+    }
     guests
-    dishes
+    dishes {
+        dishType
+        provider
+    }
   }
-  }
-  
+  } 
 `;
+
+export const QUERY_DISH = gql`
+query dish($dishId: String!) {
+    dish(dishId: $dishId){
+        _id
+    provider
+    dishName
+    dishType
+  }
+  }
+`;
+
 
