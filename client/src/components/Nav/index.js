@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 
 const Nav = () => {
     return (
-        <nav>
-            <ul style={{ listStyle: 'none', display: "flex", gap: "1rem" }}>
+        <nav className="navbar navbar-light navbar-dark imageWrapper">
+            <ul className="navlist" style={{ listStyle: 'none', display: "flex", gap: "1rem" }}>
                 <Link to='/home'>
-                    <li>Home</li>
+                    <li className="navlink">Home</li>
                 </Link>
                 <Link to='/potluck'>
-                    <li>Potluck Plannning</li>
+                    <li className="navlink">Potluck Planner</li>
                 </Link>
                 <Link to='/recipes'>
-                    <li>Recipes</li>
+                    <li className="navlink">Recipes</li>
                 </Link>
-                <li>Logout</li>
+                <li className="navlink">Logout</li>
             </ul>
         </nav>
     )
