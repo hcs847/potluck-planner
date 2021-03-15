@@ -18,8 +18,8 @@ query events {
 `;
 
 export const QUERY_EVENT = gql`
-query event($id: String!) {
-    event(_id: $id){
+query event($eventId: String!) {
+    event(eventId: $eventId){
     _id
     eventName
     message

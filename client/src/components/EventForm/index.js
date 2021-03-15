@@ -8,9 +8,9 @@ import { QUERY_EVENT } from '../../utils/queries';
 
 const EventForm = () => {
     // event id for update form option 
-    const { _id: id } = useParams();
+    const { eventId: id } = useParams();
     const { data } = useQuery(QUERY_EVENT, {
-        variables: { _id: id }
+        variables: { eventId: id }
     })
 
     // fetch single event from db once available

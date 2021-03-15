@@ -7,9 +7,9 @@ import { QUERY_EVENT } from '../utils/queries';
 
 const Event = () => {
 
-    const { _id: eventId } = useParams();
+    const { eventId: eventId } = useParams();
     const { data } = useQuery(QUERY_EVENT, {
-        variables: { _id: eventId }
+        variables: { eventId: eventId }
     });
 
     const event = data?.event || '';
@@ -19,7 +19,7 @@ const Event = () => {
     //     return events.filter(event => event._id === eventId)
     // }
 
-    console.log("id: ", eventId, "event", event);
+    console.log("id: ", eventId, "event", event, data);
 
     return (
         <>
