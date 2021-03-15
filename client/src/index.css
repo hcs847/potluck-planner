@@ -37,6 +37,7 @@ img {
   background-color: rgba(255, 255, 255, .8);
   border-radius: .3rem;
   padding: .5rem;
+  font-size: smaller;
 }
 
 .navlink:hover {
@@ -92,7 +93,7 @@ img {
 }
 
 .potluckbackground {
-  background-image: url('../src/images/invites.jpg');
+  background-image: url('../src/images/invites2.jpg');
   position: relative;
   height: 100%;
   border-top: white, 3rem, solid;
@@ -101,17 +102,21 @@ img {
 }
 
 .potluckorange {
-  float: right;
-  position: relative;
+  /*float: right;*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: center;
   padding: 2rem;
   top: 2rem;
   right: 3rem;
   bottom: 2rem;
   left: 1rem;
-  background-color: rgba(8, 42, 97, .8);
+  background-color: rgba(8, 42, 97, .9);
   border-radius: 1rem;
   max-width: 50rem;
   opacity: 100%;
+  margin-bottom: 1rem;
 }
 
 .potluckform {
@@ -127,9 +132,21 @@ img {
   line-height: normal;
 }
 
+.potlucktitle {
+  color: rgba(235, 125, 52);
+  background-color: rgba(255, 255, 255, .6);
+  text-align: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
+  align-content: center;
+  margin-top: inherit;
+
+}
+
 .forminput {
   float: right;
-  width: 50vh;
+  width: 45vh;
 }
 
 .container {

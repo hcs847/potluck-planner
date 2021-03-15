@@ -69,6 +69,7 @@ const EventForm = () => {
 
     return (
         <div class="potluckbackground">
+            <h1 class="potlucktitle">Create a Potluck Event</h1>
             <div class="potluckorange">
             <form onSubmit={handleSubmitForm}>
                 <div>
@@ -174,7 +175,7 @@ const EventForm = () => {
                             type="text"
                             value={dishInputField.dishDescription}
                             onChange={(e) => handleChangeInputFields(dishInputField.id, e, dishInputFields, setDishInputFields)}
-                        />
+                        /><br/>
                         <button class="btn" onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType', 'dishDescription')}> + Add Dishes </button>
                         {/* removing dish input fields only onClick */}
                         <button class="btn" onClick={() => handleRemoveInputFields(dishInputField.id, setDishInputFields, dishInputFields)}> - Remove Dishes </button>

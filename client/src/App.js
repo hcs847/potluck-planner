@@ -19,7 +19,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <img src={logo} style={{ maxWidth: '10%', margin: '0.1rem' }} alt="logo" />
         <GlobalProvider>
           <Nav />
           <Switch>
