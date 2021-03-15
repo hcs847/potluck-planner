@@ -54,8 +54,8 @@ type Query {
   events: [Event]
   dishes: [Dish]
   user(email: String!): User
-  event(_id: String!): Event
-  dish(_id: String): Dish
+  event(eventId: String!): Event
+  dish(dishId: String): Dish
 }
 
 type Mutation {
@@ -81,6 +81,17 @@ type Mutation {
 
   addEvent(
     eventName: String!,
+    message: String,
+    date: String,
+    time: String,
+    location: String,
+    guests: [String],
+    dishes: [DishInput]
+    ): Event
+
+  updateEvent(
+    eventId: String!,
+    eventName: String,
     message: String,
     date: String,
     time: String,
