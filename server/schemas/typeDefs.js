@@ -16,8 +16,8 @@ type User {
   firstName: String
   lastName: String
   email: String
-  guestEvents: [Event]
-  hostEvents: [Event]
+  guestEvents: [ID]
+  hostEvents: [ID]
   userDiet: [String]
 }
 
@@ -54,7 +54,7 @@ type Query {
   users: [User]
   events: [Event]
   dishes: [Dish]
-  user(email: String!): User
+  user(userId: ID!): User
   event(eventId: String!): Event
   dish(dishId: String): Dish
 }
