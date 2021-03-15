@@ -17,52 +17,49 @@ const Event = () => {
     const event = data?.event || '';
 
 
-    // const [dishId, setDishId] = useState('');
-    // const { data: dishData } = useQuery(QUERY_DISH, {
-    //     variables: { dishId }
-    // });
-
-    // let dishObj = dishData?.dish || '';
-
-
-    console.log("id: ", eventId, "event", event, data);
+    // console.log("event", event, event.host.firstName);
 
     return (
+
+
         <>
-            <ul style={{ listStyle: "none" }}>
-                <li style={{ fontWeight: "bolder" }}>{event.eventName}</li>
+            {event && (
+                <>
+                    <ul style={{ listStyle: "none" }}>
+                        <li style={{ fontWeight: "bolder" }}>{event.eventName}</li>
 
-                <li>{event.date}</li>
-                <li>{event.time}</li>
-                <li>{event.location}</li>
-                {/* <li>{event.host.firstName}</li> */}
-                <h4 style={{ marginBottom: '0.1rem' }}>Guest List:</h4>
-            </ul>
-            {event.guests.map(guest => (
-                <ul key={guest} style={{ listStyle: "none" }} >
-                    <li style={{ margin: '0.5rem' }}>Email: {guest}</li>
-                </ul>
-            ))}
-            <h4 style={{ marginBottom: '0.1rem' }}>Dishes List:</h4>
+                        <li>{event.date}</li>
+                        <li>{event.time}</li>
+                        <li>{event.location}</li>
+                        <li>Hosted By: {event.host.firstName} {event.host.lastName}</li>
+                        <h4 style={{ marginBottom: '0.1rem' }}>Guest List:</h4>
+                    </ul>
+                    {event.guests.map(guest => (
+                        <ul key={guest} style={{ listStyle: "none" }} >
+                            <li style={{ margin: '0.5rem' }}>Email: {guest}</li>
+                        </ul>
+                    ))}
+                    <h4 style={{ marginBottom: '0.1rem' }}>Dishes List:</h4>
 
-            {event.dishes.map(dish => (
-                <div key={dish._id} style={{ listStyle: "none" }}>
-                    {/* {dishObj && (
-                        <>
-                            {setDishId(dish)}
-                            <p> {dishObj.dishType}</p>
-                        </>
-                    )
-                    } */}
-                    <button>SignUp</button>
-                </div>
-            ))
-            }
+                    {event.dishes.map(dish => (
 
-            <button style={{ margin: '1rem' }}>Update form</button>
+                        <ul key={dish._id} style={{ listStyle: "none" }}>
+                            {dish.dishType && (
 
+                                <li style={{
+                                    display: "flex", justifyContent: "space-around", width: "15vw"
+                                }}><span>{dish.dishType}</span><button>SignUp</button><span>Provider:</span></li>
+                            )}
 
+                        </ul>
+                    ))
+                    }
+
+                    <button style={{ margin: '1rem' }}>Update form</button>
+                </>
+            )}
         </>
+
     )
 }
 

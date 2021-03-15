@@ -3,6 +3,7 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 
 input DishInput {
+  provider: String
   dishName: String
   dishType: String
   quantity: Int
@@ -15,8 +16,8 @@ type User {
   firstName: String
   lastName: String
   email: String
-  guestEvents: [Event]
-  hostEvents: [Event]
+  guestEvents: [ID]
+  hostEvents: [ID]
   userDiet: [String]
 }
 
@@ -36,10 +37,10 @@ type Event {
   date: String
   time: String
   location: String
-  host: ID
-  guests: [ID]
+  host: User
+  guests: [String]
   guestCount: Int
-  dishes: [ID]
+  dishes: [Dish]
 }
 
 type Auth {
@@ -53,8 +54,8 @@ type Query {
   users: [User]
   events: [Event]
   dishes: [Dish]
-  user(email: String!): User
-  event(eventId: String!): Event
+  user(userId: ID!): User
+  event(eventId: ID!): Event
   dish(dishId: String): Dish
 }
 
@@ -71,9 +72,12 @@ type Mutation {
     ): Auth
 
   updateMe(
-    email: String,
+    password: String,
     firstName: String,
     lastName: String,
+    email: String,
+    guestEvents: [ID],
+    hostEvents: [ID]
     userDiet: [String]
     ): User
 

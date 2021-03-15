@@ -8,13 +8,9 @@ const resolvers = {
   Query: {
 
     me: async (obj, args, context) => {
-
       if (context.user) {
-
-        const userData = await User.findOne({ _id: context.user._id })
+        return await User.findOne({ _id: context.user._id })
           .select('-__v -password');
-
-        return userData;
       }
 
       throw new AuthenticationError('Not logged in');
@@ -26,17 +22,18 @@ const resolvers = {
     },
 
     events: async () => {
-      return Event.find().sort({ date: -1 });
+      return Event.find().sort({ date: -1 })
+        .populate('host dishes');
     },
 
-    user: async (obj, { email }) => {
-      return User.findOne({ email: email })
+    user: async (obj, { userId }) => {
+      return User.findOne({ _id: userId })
         .select('-__v -password');
     },
 
-    event: async (obj, { eventId }, context) => {
-      const event = await Event.findOne({ _id: eventId });
-      return event;
+    event: async (obj, { eventId }) => {
+      return await Event.findOne({ _id: eventId })
+        .populate('host dishes');
     },
 
     dishes: async () => {
@@ -51,7 +48,6 @@ const resolvers = {
   Mutation: {
 
     login: async (obj, { email, password }) => {
-
       const user = await User.findOne({ email });
 
       if (!user) {
@@ -63,6 +59,7 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
+
       const token = signToken(user);
       return { token, user };
     },
@@ -75,7 +72,6 @@ const resolvers = {
     },
 
     updateMe: async (obj, args, context) => {
-
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -103,6 +99,7 @@ const resolvers = {
       if (context.user) {
         const dishes = await Dish.insertMany(args.dishes);
         const dishIds = dishes.map(dish => dish._id);
+
         const event = await Event.create({
           eventName: args.eventName,
           message: args.message,
@@ -113,6 +110,21 @@ const resolvers = {
           dishes: dishIds,
           host: context.user._id
         });
+
+        // add event to guestEvents for each guest
+        args.guests.forEach(async guest => {
+          await User.findOneAndUpdate(
+            { email: guest },
+            { $push: { guestEvents: event._id } }
+          );
+        });
+
+        // add event to hostEvents for the host
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { hostEvents: event._id } }
+        );
+
         return event;
       }
 
@@ -124,22 +136,7 @@ const resolvers = {
         const hostEvent = await Event.findOne({ _id: args.eventId });
 
         if (hostEvent.host == context.user._id) {
-          // Find existing dishes
-          const existingDishes = await Dish.find(hostEvent.dishes);
-          console.log(existingDishes);
-          existingDishes.forEach(exDish => {
-
-          })
-          // Get existing dishes index
-          const exDishIndex = args.dishes.map(dish => {
-            if (existingDishes.indexOf(dish._id) !== -1) {
-              return dish._id
-            }
-          })
-          // update existing dishes
-          existingDishes.forEach(async dish => {
-            await Dish.findOneAndUpdate({ _id: dish }, {})
-          })
+          await Dish.deleteMany({ _id: hostEvent.dishes });
           await Event.findOneAndUpdate(
             { _id: args.eventId },
             { $set: { dishes: [] } }
@@ -201,8 +198,6 @@ const resolvers = {
     deleteEvent: async (obj, args, context) => {
       const eventHostCheck = await Event.findOne({ _id: args.eventId });
       if (context.user) {
-        console.log(eventHostCheck.host);
-        console.log(context.user._id);
         if (eventHostCheck.host == context.user._id) {
           const deletedEvent = await Event.findOneAndDelete(
             { _id: args.eventId }
