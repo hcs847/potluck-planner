@@ -1,39 +1,66 @@
 const db = require('./connection');
-const { User, Product, Category } = require('../models');
+const { User, Event } = require('../models');
 
 db.once('open', async () => {
-  await Category.deleteMany();
 
-  const categories = await Category.insertMany([
-    { name: 'Food' },
-    { name: 'Household Supplies' },
-    { name: 'Electronics' },
-    { name: 'Books' },
-    { name: 'Toys' }
-  ]);
+  await Event.deleteMany();
 
-  console.log('categories seeded');
-
-  await Product.deleteMany();
-
-  const products = await Product.insertMany([
+  const products = await Event.insertMany([
     {
-      name: 'Tin of Cookies',
-      description:
-        'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-      image: 'cookie-tin.jpg',
-      category: categories[0]._id,
-      price: 2.99,
-      quantity: 500
+      eventName: "Test Event One",
+      message: "This will be the greatest event",
+      date: "04/01/2021",
+      time: "5:00pm",
+      location: "My house",
+      guests: ["guestOne@email.com", "guestTwo@email.com", "guestThree@email.com", "guestFour@email.com", "guestFive@email.com"],
+      dishes: [
+        {
+          dishName: "Nachos",
+          dishType: "Side",
+          quantity: 2,
+          dishDiet: ["Vegetarian"]
+        },
+        {
+          dishName: "Tacos",
+          dishType: "Main",
+          quantity: 12,
+          dishDiet: ["None"]
+        },
+        {
+          dishName: "Jarritos",
+          dishType: "Beverage",
+          quantity: 6,
+          dishDiet: ["None"]
+        }
+      ]
     },
     {
-      name: 'Canned Coffee',
-      description:
-        'Praesent sed lacinia mauris. Nulla congue nibh magna, at feugiat nunc scelerisque quis. Donec iaculis rutrum vulputate. Suspendisse lectus sem, vulputate ac lectus sed, placerat consequat dui.',
-      image: 'canned-coffee.jpg',
-      category: categories[0]._id,
-      price: 1.99,
-      quantity: 500
+      eventName: "Test Event One",
+      message: "This will be the greatest event",
+      date: "04/01/2021",
+      time: "5:00pm",
+      location: "My house",
+      guests: ["guestOne@email.com", "guestTwo@email.com", "guestThree@email.com", "guestFour@email.com", "guestFive@email.com"],
+      dishes: [
+        {
+          dishName: "Nachos",
+          dishType: "Side",
+          quantity: 2,
+          dishDiet: ["Vegetarian"]
+        },
+        {
+          dishName: "Tacos",
+          dishType: "Main",
+          quantity: 12,
+          dishDiet: ["None"]
+        },
+        {
+          dishName: "Jarritos",
+          dishType: "Beverage",
+          quantity: 6,
+          dishDiet: ["None"]
+        }
+      ]
     },
     {
       name: 'Toilet Paper',
