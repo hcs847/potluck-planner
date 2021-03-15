@@ -32,20 +32,26 @@ export const ADD_EVENT = gql`
       $message: String,
       $date: String!,
       $time: String!,
-      $location: String! ) {
+      $location: String!,
+      $guests: [String],
+      $dishes: [DishInput]
+     ) {
     addEvent(
         eventName: $eventName,
         message: $message,
         date: $date,
         time: $time,
-        location: $location
+        location: $location,
+        guests: $guests,
+        dishes: $dishes
+
       ) {
         _id
-    eventName
-    location
-    host 
-    guests 
-    dishes 
+        eventName
+        location
+        host 
+        guests 
+        dishes 
   } 
 }
 `;
