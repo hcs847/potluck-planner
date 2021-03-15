@@ -3,6 +3,7 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 
 input DishInput {
+  provider: String
   dishName: String
   dishType: String
   quantity: Int

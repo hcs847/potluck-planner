@@ -124,22 +124,7 @@ const resolvers = {
         const hostEvent = await Event.findOne({ _id: args.eventId });
 
         if (hostEvent.host == context.user._id) {
-          // Find existing dishes
-          const existingDishes = await Dish.find(hostEvent.dishes);
-          console.log(existingDishes);
-          existingDishes.forEach(exDish => {
-
-          })
-          // Get existing dishes index
-          const exDishIndex = args.dishes.map(dish => {
-            if (existingDishes.indexOf(dish._id) !== -1) {
-              return dish._id
-            }
-          })
-          // update existing dishes
-          existingDishes.forEach(async dish => {
-            await Dish.findOneAndUpdate({ _id: dish }, {})
-          })
+          await Dish.deleteMany({ _id: hostEvent.dishes });
           await Event.findOneAndUpdate(
             { _id: args.eventId },
             { $set: { dishes: [] } }
