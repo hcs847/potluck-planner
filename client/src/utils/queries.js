@@ -34,3 +34,16 @@ query event($eventId: String!) {
   
 `;
 
+export const QUERY_DISH = gql`
+query dish($dishId: String!) {
+    dish(dishId: $dishId){
+        _id
+    provider
+    dishName
+    dishType
+  }
+  }
+  
+`;
+
+
