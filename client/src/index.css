@@ -3,7 +3,6 @@ body {
   font-family: 'Lora', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 1.2rem;
   line-height: 1.4;
   color: navy;
   margin-top: 0;
@@ -17,7 +16,7 @@ img {
   background-image: url('../src/images/Nav.jpg');
   background-size: cover;
   position: absolute;
-  max-height: 10vh;
+  max-height: 20vh;
   z-index: 0;
   top: 0;
   left: 0;
@@ -37,7 +36,7 @@ img {
   background-color: rgba(255, 255, 255, .8);
   border-radius: .3rem;
   padding: .5rem;
-  font-size: smaller;
+  font-size: .85rem;
 }
 
 .navlink:hover {
@@ -53,20 +52,23 @@ img {
 
 .eventname {
   color:#b5510e;
-  background-color: white;
+  background-color: rgba(255, 255, 255, .7);
   padding: .5rem;
   border-radius: .2rem;
   font-size: large;
 }
 
 .eventorange {
-  position: relative;
-  padding: 2.2rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: center;
+  padding: 2rem;
   top: 2rem;
   left: 2rem;
   right: 2rem;
   bottom: 2rem;
-  background-color: rgba(235, 125, 52, .75);
+  background-color: rgba(235, 125, 52, .85);
   border-radius: 1rem;
   max-width: 100vh;
 }
@@ -86,17 +88,17 @@ img {
 }
 
 .recipesbackground {
-  background-image: url('../src/images/recipes.jpg');
-  position: absolute;
-  width: 100%;
+  background-image: url('../src/images/recipes2.jpg');
+  position: relative;
   height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .potluckbackground {
   background-image: url('../src/images/invites2.jpg');
   position: relative;
   height: 100%;
-  border-top: white, 3rem, solid;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -137,16 +139,28 @@ img {
   background-color: rgba(255, 255, 255, .6);
   text-align: center;
   align-items: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   align-content: center;
   margin-top: inherit;
-
 }
 
 .forminput {
   float: right;
   width: 45vh;
+  font-family: 'Lora';
+  color: gray;
+}
+
+.recipestitle {
+  color: rgba(235, 125, 52);
+  background-color: rgba(255, 255, 255, .6);
+  text-align: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  align-content: center;
+  margin-top: inherit;
 }
 
 .container {
@@ -172,8 +186,9 @@ footer a {
 h1 {}
 
 h2 {
-  font-family: 'Lora', serif; 
+  font-family: 'Lora', serif;
   color: white;
+  font-size: 2rem;
 }
 
 h3 {}
@@ -187,6 +202,7 @@ h3 {}
   background-color: white;
   color: #eb7d34;
   border-color: white;
+  font-family: 'Lora', serif;
 }
 
 .btn:hover {

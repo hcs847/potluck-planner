@@ -40,9 +40,9 @@ const Recipes = () => {
 
 
     return (
-        <>
         <div class="recipesbackground">
-            <h1 style={{ textAlign: 'center' }}>Inspiration</h1>
+            <h1 class="recipestitle">Inspiration</h1>
+            <div>
             < SearchForm style={{ margin: '0 auto' }} onSearch={handleSearch} search={search} onSubmit={handleSubmit} />
             <div style={{ display: 'flex', justifyContent: "space-between", flexWrap: 'wrap', maxWidth: '75vw', margin: '0 auto' }}>
                 {recipes.map(recipe => (
@@ -53,9 +53,9 @@ const Recipes = () => {
                         key={recipe.recipe.uri} />
                 ))
                 }
+                </div>
             </div>
         </div>
-        </>
     )
 }
 
