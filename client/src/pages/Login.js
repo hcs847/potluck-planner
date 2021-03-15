@@ -32,44 +32,44 @@ const Login = (event) => {
 
     return (
         <>
-            <div class="loginbackground">
-            <h2>Sign In</h2>
-            <form onSubmit={handleFormSubmit}>
-                <div>
-                    <label htmlFor="email">Email: </label>
-                    <input
-                        placeholder='youremail@email.com'
-                        name='email'
-                        type='email'
-                        id='email'
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="pwd">Password:</label>
-                    <input
-                        placeholder='******'
-                        name='password'
-                        type='passwrod'
-                        id='pwd'
-                        onChange={handleChange}
-                    />
-                </div>
-                {
-                    error ? <div>
-                        <p>The provided credentials are incorrect</p>
-                    </div> : null
+            <div className="loginbackground">
+                <h2>Sign In</h2>
+                <form onSubmit={handleFormSubmit}>
+                    <div>
+                        <label htmlFor="email">Email: </label>
+                        <input
+                            placeholder='youremail@email.com'
+                            name='email'
+                            type='email'
+                            id='email'
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="pwd">Password:</label>
+                        <input
+                            placeholder='******'
+                            name='password'
+                            type='passwrod'
+                            id='pwd'
+                            onChange={handleChange}
+                        />
+                    </div>
+                    {
+                        error ? <div>
+                            <p>The provided credentials are incorrect</p>
+                        </div> : null
 
-                }
+                    }
+                    <div>
+                        <button type='submit'>Sign In</button>
+                    </div>
+                </form>
+                <br />
                 <div>
-                    <button type='submit'>Sign In</button>
-                </div>
-            </form>
-            <br />
-            <div>
-                New to Potluck Planner? 
+                    New to Potluck Planner?
                 <Link to='/signup'> Join Now</Link>
-            </div>
+                </div>
             </div>
         </>
     )

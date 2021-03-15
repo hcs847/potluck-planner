@@ -43,45 +43,28 @@ export const ADD_EVENT = gql`
         _id
     eventName
     location
-    host {
-      firstName
-      lastName
-      email
-    }
-    guests {
-      firstName
-    }
-    dishes {
-      dishName
-    }
+    host 
+    guests 
+    dishes 
   } 
 }
 `;
 
-export const ADD_DISH = gql`
-  mutation addDish(
-      $eventId: ID!,
-      $dishName: String!
+export const ASSIGN_DISH = gql`
+  mutation updateDish(
+      $eventId: ID,
+      $dishName: String
      ) {
-    addDish(
+        updateDish(
         eventId: $eventId,
         dishName: $dishName
       ) {
         _id
     eventName
     location
-    host {
-      firstName
-      lastName
-      email
-    }
-    guests {
-      firstName
-    }
-    dishes {
-      dishName
-      
-    }
+    host
+    guests
+    dishes 
       }
 }
 `;
