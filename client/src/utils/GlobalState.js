@@ -51,7 +51,7 @@ const GlobalProvider = ({ value = [], ...props }) => {
     })
 
     // test
-    console.log("state.events: ", state.events);
+    // console.log("state.events: ", state.events);
 
     // // actions
     // function addEvent(event) {

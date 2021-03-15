@@ -50,7 +50,7 @@ export const ADD_EVENT = gql`
 }
 `;
 
-export const ADD_DISH = gql`
+export const ASSIGN_DISH = gql`
   mutation updateDish(
       $eventId: ID,
       $dishName: String

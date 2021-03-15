@@ -7,23 +7,24 @@ import { QUERY_EVENT } from '../utils/queries';
 
 const Event = () => {
 
-    const { _id: id } = useParams();
+    const { _id: eventId } = useParams();
     const { data } = useQuery(QUERY_EVENT, {
-        variables: { _id: id }
+        variables: { _id: eventId }
     });
+
     const event = data?.event || '';
 
 
     // const singleEvent = () => {
-    //     return events.filter(event => event._id === id)
+    //     return events.filter(event => event._id === eventId)
     // }
 
-    // console.log("id: ", id, singleEvent());
+    console.log("id: ", eventId, "event", event);
 
     return (
         <>
             {/* {singleEvent.map(event => ( */}
-            <ul key={event._id} style={{ listStyle: "none" }}>
+            <ul style={{ listStyle: "none" }}>
                 <li style={{ fontWeight: "bolder" }}>{event.eventName}</li>
                 {/* <li>{event.guests.firstName}</li> */}
                 <li>{event.date}</li>
@@ -37,11 +38,11 @@ const Event = () => {
                     </ul>
                 ))} */}
                 <h4 style={{ marginBottom: '0.1rem' }}>Dishes List:</h4>
-                {event.dishes.map(dish => (
+                {/* {event.dishes.map(dish => (
                     <ul key={dish.dishName} style={{ listStyle: "none" }}>
                         <li style={{ margin: '0.5rem' }} key={dish.dishId}>{dish.dishName} <button>SignUp</button></li>
                     </ul>
-                ))}
+                ))} */}
             </ul>
 
             {/* )} */}

@@ -1,40 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { ADD_EVENT, ADD_DISH } from '../../utils/mutations';
+import { ADD_EVENT } from '../../utils/mutations';
 import DishForm from '../DishForm';
 import BasicEventForm from '../BasicEventForm';
 import { QUERY_EVENT } from '../../utils/queries';
 
 const EventForm = () => {
-    // Dishes array input fields
-    const [dishInputFields, setDishInputFields] = useState([{
-        id: 0,
-        dishName: ''
-    }]);
-
-    const [dishsName, setDishsName] = useState('');
-
-    const addDishInput = (e) => {
-        e.preventDefault();
-        setDishInputFields([
-            ...dishInputFields,
-            {
-                id: dishInputFields.length,
-                dishName: dishsName
-            }
-        ]);
-        console.log("dishInputFields", dishInputFields);
-        //  update form state with dishes array
-        // setBasicEventState({
-        //     ...basicEventState,
-        //     dishes: [...dishInputFields]
-        // }
-        // )
-
-    }
-
-    // event id for update form
+    // event id for update form option 
     const { _id: id } = useParams();
     const { data } = useQuery(QUERY_EVENT, {
         variables: { _id: id }
@@ -47,84 +20,105 @@ const EventForm = () => {
     // addEvent function from graphql mutations functions
     const [addEvent, { error }] = useMutation(ADD_EVENT);
 
-    // add a dish to an existing event
-    const [addDish, { dishError }] = useMutation(ADD_DISH);
+    // state for dynamic input fields for dishes and guests arrays
+    const [dishInputFields, setDishInputFields] = useState([{
+        dishType: ''
+    }]);
+    const [guestInputFields, setGuestInputFields] = useState([""]);
 
-    // store created event id
-    const [eventId, setEventId] = useState('');
+    // dynamic redndering of input fields for guests and dishes
+    const handleChangeInputFields = (id, e, inputFields, setFieldState, array) => {
+        const newInputFields = inputFields.map(field => {
+            // console.log("id", id, "field.id", field.id, "field", field, "inputFields", inputFields)
+            if (id === inputFields.indexOf(field)) {
+                field[e.target.name] = e.target.value
+            }
+            return field;
+        })
+        setFieldState([...newInputFields]);
+        // updating the state of the whole form
+        setEventState({
+            ...eventState,
+            [array]: [...newInputFields]
+        });
+
+    };
+
+    // dynamically adding new input fields for dishes 
+    const handleAddInputFields = (e, setFieldState, inputFields, key) => {
+        e.preventDefault();
+        setFieldState([...inputFields, {
+            [key]: ''
+        }])
+    }
+
+    // dynamically adding new input fields for guests
+    const handleAddGuestInputFields = (e) => {
+        e.preventDefault();
+        setGuestInputFields([e.target.value, ...guestInputFields]);
+    }
+
+    const handleChangeGuestInputFields = (id, e) => {
+        const newGuestInputfields = guestInputFields.map(guest => {
+            console.log("new guests", id, guestInputFields.indexOf(guest));
+            if (id === guestInputFields.indexOf(guest)) {
+                return e.target.value;
+            }
+            return guest;
+        })
+        setGuestInputFields([...newGuestInputfields]);
+        // updating the state of the whole form
+        setEventState({
+            ...eventState,
+            guests: [...newGuestInputfields]
+        });
+    }
+
+    // dynamically removing guests/dishes input fields
+    const handleRemoveInputFields = (id, setInputFields, inputFields) => {
+        setInputFields([...[...inputFields].filter(inputField => inputField.id !== id)]);
+    }
 
     // handling state for input of Event form fields
-    const [basicEventState, setBasicEventState] = useState({
+    const [eventState, setEventState] = useState({
         eventName: '',
         message: '',
         date: '',
         time: '',
         location: '',
-        dishes: [dishInputFields]
+        dishes: [...dishInputFields],
+        guests: [...guestInputFields]
     });
 
-    // handling state for dishes
-    const [dishState, setDishState] = useState({
-        dishName: ''
-        // ,
-        // dishType: ''
-    });
-
-    // handling state for the whole event
-    const [eventState, setEventState] = useState({
-        ...basicEventState,
-        ...dishState
-    });
 
     // handling change for basic fields within form
     const handleChangeEventForm = (e) => {
         const { name, value } = e.target;
-        setBasicEventState({
-            ...basicEventState,
+        setEventState({
+            ...eventState,
             [name]: value
         })
-
     };
+
+
+
+    // store in state created event id once form is submitted
+    const [eventId, setEventId] = useState('');
 
     const handleSubmitEventForm = async event => {
         event.preventDefault();
 
         try {
             const { data } = await addEvent({
-                variables: { ...basicEventState }
+                variables: { ...eventState }
             });
 
             // retrieving id of created event
             setEventId(data.addEvent._id);
+            console.log("data when submitting", data);
 
         } catch (e) {
             console.error(e);
-        }
-    }
-
-    // handling change for Dishes within form
-    const handleChangeDishForm = (e) => {
-        const { name, value } = e.target;
-        setDishState({
-            ...dishState,
-            [name]: value
-        });
-        // console.log("dishState:", dishState)
-    };
-
-    // dish form submit
-    const handleSubmitDishForm = async e => {
-        e.preventDefault();
-
-        try {
-            const { data } = await addDish({
-                variables: { eventId, ...dishInputFields }
-            });
-
-            console.log("addDish: data ", data);
-
-        } catch (err) {
-            console.error(err);
         }
     }
 
@@ -133,68 +127,117 @@ const EventForm = () => {
         if (id) {
             setEventState(singleEvent)
         }
-        console.log(eventState);
+        // console.log(eventState);
     }, [singleEvent]);
 
     return (
         <>
             {/* if there's no eventId yet, display basic details of event form */}
             {
-                !eventId && !id && (
+                !id && (
                     <form onSubmit={handleSubmitEventForm}>
-                        <BasicEventForm handleChange={handleChangeEventForm} basicEvent={basicEventState} />
-
-
-                        <button style={{ fontWeight: '700' }}
-                            type="submit"
-                        >
-                            Next
-                    </button>
-
                         {error && <span>Something went wrong...</span>}
+                        <div>
+                            <label htmlFor="eventName">Event Name:</label>
+                            <input
+                                placeholder="Event's name"
+                                name="eventName"
+                                type="text"
+                                value={eventState.eventName}
+                                onChange={handleChangeEventForm}
+                            />
+                        </div>
                         <br />
-                    </form>
-                )
-            }
-            {
-                eventId && (
-                    <form onSubmit={handleSubmitDishForm}>
-                        <DishForm onBlurDish={addDishInput} handleChange={handleChangeEventForm} dishsName={dishsName} setDishName={setDishsName} dishes={dishInputFields} />
+                        <div>
+                            <label htmlFor="message">Welcome message for guests</label>
+                            <textarea
+                                placeholder="Welcome message:"
+                                name="message"
+                                type="text"
+                                value={eventState.message}
+                                onChange={handleChangeEventForm}
+                            />
+                        </div>
+                        <br />
+                        <div>
+                            <label htmlFor="date">Event date:</label>
+                            <input
+                                placeholder="Event's date"
+                                name="date"
+                                type="date"
+                                value={eventState.date}
+                                onChange={handleChangeEventForm}
+                            />
+                        </div>
+                        <br />
+                        <div>
+                            <label htmlFor="time">Time:</label>
+                            <input
+                                placeholder="Event's time"
+                                name="time"
+                                type="time"
+                                value={eventState.time}
+                                onChange={handleChangeEventForm}
+                            />
+                        </div>
+                        <br />
+                        <div>
+                            <label htmlFor="location">Location:</label>
+                            <input
+                                placeholder="Event's location"
+                                name="location"
+                                type="text"
+                                value={eventState.location}
+                                onChange={handleChangeEventForm}
+                            />
+                        </div>
+                        <br />
+                        <p style={{ fontWeight: '700' }}>Dishes to Share:</p>
+                        {dishInputFields.map((dishInputField, i) =>
+                            (
+                                <div key={`dish${i}${dishInputFields.indexOf(dishInputField)}`}>
+                                    <label htmlFor="dishType">Dish Type:</label>
+                                    <input
+                                        placeholder="Dish Type"
+                                        name="dishType"
+                                        type="text"
+                                        value={dishInputField.dishType}
+                                        onChange={(e) => handleChangeInputFields(i, e, dishInputFields, setDishInputFields, 'dishes')}
+                                    />
+                                    <button onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType')}>+ Add More Dishes</button>
+                                    <button>- Remove Dish</button>
+                                    <br />
+                                </div>
+                            )
+                        )}
+
+                        <p style={{ fontWeight: '700' }}>Guests to Invite:</p>
+                        {guestInputFields.map((guestInputField, i) =>
+                            (
+                                <div key={`guest${i}${guestInputFields.indexOf(guestInputField)}`}>
+                                    <label htmlFor="guestEmail">Guest Email:</label>
+                                    <input
+                                        placeholder="Guest Email"
+                                        name="guestEmail"
+                                        type="email"
+                                        value={guestInputField}
+                                        onChange={(e) => handleChangeGuestInputFields(i, e)}
+                                    />
+                                    <button onClick={(e) => handleAddGuestInputFields(e)}>+ Add More Guests</button>
+                                    <button>- Remove Guest</button>
+                                    <br />
+                                </div>
+                            )
+                        )}
+                        <br />
                         <button
                             type="submit"
                         >
-                            Update dish/ add another dish
-                </button>
-                    </form>
-                )
-            }
-            {dishError && <span>Something went wrong...</span>}
-            <br />
-
-            {
-                eventId && (
-                    <form>
-                        <label htmlFor="guestName">Guest Name:</label>
-                        <input
-                            placeholder="Guest name"
-                            name="guestName"
-                            type="name"
-                        />
-                        <label htmlFor="guestEmail">Guest Email:</label>
-                        <input
-                            placeholder="Guest Email"
-                            name="guestEmail"
-                            type="email"
-                        />
-
-                        <button
-                            type="submit">
-                            Update Guest/add another guest
+                            Create Event
                         </button>
                     </form>
                 )
             }
-            <br />
             {
                 eventId && (
                     <Link to={`/event/${eventId}`}>
@@ -204,16 +247,19 @@ const EventForm = () => {
                     </Link>
                 )
             }
-            {/* Change Event Form */}
+            {/* Change Event Form 
+            =====================
+            =====================
+            */}
             {
                 id && (
                     <>
 
                         <form>
                             <h3>Update your event</h3>
-                            <BasicEventForm handleChange={handleChangeEventForm} basicEvent={eventState} />
+                            {/* <BasicEventForm handleChange={handleChangeEventForm} basicEvent={eventState} /> */}
                             {/* <DishForm handleChange={handleChangeDishForm} handleSubmit={handleSubmitDishForm} dishes={singleEvent.dishes} /> */}
-                            <DishForm onBlurDish={addDishInput} handleChange={handleChangeEventForm} dishsName={dishsName} setDishName={setDishsName} dishes={dishInputFields} />
+                            {/* <DishForm /> */}
                             <br />
                             <br />
                             <button>Submit Changes</button>
