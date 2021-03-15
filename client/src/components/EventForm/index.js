@@ -90,7 +90,6 @@ const EventForm = () => {
         guests: [...guestInputFields]
     });
 
-
     // handling change for basic fields within form
     const handleChangeEventForm = (e) => {
         const { name, value } = e.target;
@@ -99,8 +98,6 @@ const EventForm = () => {
             [name]: value
         })
     };
-
-
 
     // store in state created event id once form is submitted
     const [eventId, setEventId] = useState('');
@@ -112,6 +109,7 @@ const EventForm = () => {
             const { data } = await addEvent({
                 variables: { ...eventState }
             });
+            console.log(eventState)
 
             // retrieving id of created event
             setEventId(data.addEvent._id);
@@ -132,7 +130,6 @@ const EventForm = () => {
 
     return (
         <>
-            {/* if there's no eventId yet, display basic details of event form */}
             {
                 !id && (
                     <form onSubmit={handleSubmitEventForm}>
@@ -249,7 +246,6 @@ const EventForm = () => {
             }
             {/* Change Event Form 
             =====================
-            =====================
             */}
             {
                 id && (
@@ -257,12 +253,9 @@ const EventForm = () => {
 
                         <form>
                             <h3>Update your event</h3>
-                            {/* <BasicEventForm handleChange={handleChangeEventForm} basicEvent={eventState} /> */}
-                            {/* <DishForm handleChange={handleChangeDishForm} handleSubmit={handleSubmitDishForm} dishes={singleEvent.dishes} /> */}
-                            {/* <DishForm /> */}
-                            <br />
-                            <br />
+
                             <button>Submit Changes</button>
+                            <button>Delete Event</button>
                         </form>
                     </>
 
