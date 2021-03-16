@@ -250,7 +250,7 @@ const EventForm = () => {
                 </form>
 
                 {/* Enable Event deletion when event id is in url */}
-                {id && (
+                {/* {id && (
                     <>
                         <br />
                         <button className="btn" style={{ width: "12vw" }} onClick={handleDeleteEvent}>Delete Event</button>
@@ -258,7 +258,7 @@ const EventForm = () => {
                             <span style={{ color: 'red' }}>Something went wrong...</span>
                         )}
                     </>
-                )}
+                )} */}
 
                 {
                     eventId && (
