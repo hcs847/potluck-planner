@@ -22,13 +22,11 @@ const Recipes = () => {
         setSearch('');
     }
 
-
     const getRecipes = async () => {
         const response = await fetch(`https://api.edamam.com/search?q=${searchTerm}&app_id=${process.env.REACT_APP_APP_ID}&app_key=${process.env.REACT_APP_APP_KEY}&from=0&to=6`);
         const data = await response.json();
         // console.log(recipes.hits[0].recipe.image);
         setRecipes(data.hits);
-
     }
 
     const [recipes, setRecipes] = useState([]);
@@ -36,13 +34,12 @@ const Recipes = () => {
     useEffect(() => {
         getRecipes();
         // console.log(searchTerm);
-    }, [searchTerm]);
-
+    }, [searchTerm, getRecipes]);
 
     return (
-        <>
-            <div className="recipesbackground">
-                <h1 style={{ textAlign: 'center' }}>Inspiration</h1>
+        <div className="recipesbackground">
+            <h1 className="recipestitle">Inspiration</h1>
+            <div>
                 < SearchForm style={{ margin: '0 auto' }} onSearch={handleSearch} search={search} onSubmit={handleSubmit} />
                 <div style={{ display: 'flex', justifyContent: "space-between", flexWrap: 'wrap', maxWidth: '75vw', margin: '0 auto' }}>
                     {recipes.map(recipe => (
@@ -55,7 +52,7 @@ const Recipes = () => {
                     }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

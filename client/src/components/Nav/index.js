@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Nav = () => {
     return (
-        <nav className="navbar navbar-light navbar-dark imageWrapper">
+        <nav className="navbar">
             <ul className="navlist" style={{ listStyle: 'none', display: "flex", gap: "1rem" }}>
                 <Link to='/home'>
                     <li className="navlink">Home</li>
