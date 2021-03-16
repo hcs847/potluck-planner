@@ -37,9 +37,9 @@ const Recipes = () => {
     }, [searchTerm, getRecipes]);
 
     return (
-        <>
-            <div className="recipesbackground">
-                <h1 style={{ textAlign: 'center' }}>Inspiration</h1>
+        <div className="recipesbackground">
+            <h1 className="recipestitle">Inspiration</h1>
+            <div>
                 < SearchForm style={{ margin: '0 auto' }} onSearch={handleSearch} search={search} onSubmit={handleSubmit} />
                 <div style={{ display: 'flex', justifyContent: "space-between", flexWrap: 'wrap', maxWidth: '75vw', margin: '0 auto' }}>
                     {recipes.map(recipe => (
@@ -52,7 +52,7 @@ const Recipes = () => {
                     }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

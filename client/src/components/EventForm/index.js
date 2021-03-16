@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { ADD_EVENT, DELETE_EVENT } from '../../utils/mutations';
+import { ADD_EVENT } from '../../utils/mutations';
+// import DishForm from '../DishForm';
+// import BasicEventForm from '../BasicEventForm';
 import { QUERY_EVENT } from '../../utils/queries';
 
 const EventForm = () => {
@@ -13,31 +15,16 @@ const EventForm = () => {
 
     // fetch single event from db once available
     const singleEvent = data?.event || '';
-    // console.log("singleEvent: ", singleEvent);
+    console.log("singleEvent: ", singleEvent);
 
     // addEvent function from graphql mutations functions
     const [addEvent, { error }] = useMutation(ADD_EVENT);
 
-    // delet event mutation 
-    const [deleteEvent, { error: deleteError }] = useMutation(DELETE_EVENT);
-
     // state for dynamic input fields for dishes and guests arrays
-    const dishObj = {
-        dishType: ""
-    };
-    const [dishInputFields, setDishInputFields] = useState([dishObj]);
+    const [dishInputFields, setDishInputFields] = useState([{
+        dishType: ''
+    }]);
     const [guestInputFields, setGuestInputFields] = useState([""]);
-
-    // handling state for input of Event form fields
-    const [eventState, setEventState] = useState({
-        eventName: '',
-        message: '',
-        date: '',
-        time: '',
-        location: '',
-        dishes: dishInputFields || [dishObj],
-        guests: guestInputFields || [""]
-    });
 
     // dynamic redndering of input fields for guests and dishes
     const handleChangeInputFields = (id, e, inputFields, setFieldState, array) => {
@@ -89,12 +76,19 @@ const EventForm = () => {
 
     // dynamically removing guests/dishes input fields
     const handleRemoveInputFields = (id, setInputFields, inputFields) => {
-        const newInputFields = inputFields.filter(inputField => inputFields.indexOf(inputField) !== id);
-        setInputFields([...newInputFields]);
-        console.log(newInputFields);
+        setInputFields([...[...inputFields].filter(inputField => inputField.id !== id)]);
     }
 
-
+    // handling state for input of Event form fields
+    const [eventState, setEventState] = useState({
+        eventName: '',
+        message: '',
+        date: '',
+        time: '',
+        location: '',
+        dishes: [...dishInputFields],
+        guests: [...guestInputFields]
+    });
 
     // handling change for basic fields within form
     const handleChangeEventForm = (e) => {
@@ -108,63 +102,31 @@ const EventForm = () => {
     // store in state created event id once form is submitted
     const [eventId, setEventId] = useState('');
 
-    const handleSubmitEventForm = async e => {
-        e.preventDefault();
+    const handleSubmitEventForm = async event => {
+        event.preventDefault();
 
         try {
             const { data } = await addEvent({
                 variables: { ...eventState }
             });
+            console.log(eventState)
 
-            // retrieving id of created event from the event query
+            // retrieving id of created event
             setEventId(data.addEvent._id);
-            // clearing form inputs
-            setDishInputFields([{
-                dishType: ''
-            }]);
-            setGuestInputFields([""]);
-            setEventState([
-                {
-                    eventName: '',
-                    message: '',
-                    date: '',
-                    time: '',
-                    location: '',
-                    dishes: dishInputFields,
-                    guests: guestInputFields
-                }
-            ]);
-            console.log("data, event.state when submitting", data, eventState);
+            console.log("data when submitting", data);
 
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
-    // delete an event
-    const handleDeleteEvent = async e => {
-        e.preventDefault();
-        try {
-            await deleteEvent({
-                variables: { eventId: id }
-            });
-            //    Redirect to homepage
-            setTimeout(() => { window.location.assign('/potluck') }, 2000);
-
-        } catch (err) {
-            console.error(err);
+        } catch (e) {
+            console.error(e);
         }
     }
 
     // extract event details when eventId is available in useParams
     useEffect(() => {
         if (id) {
-            setDishInputFields(singleEvent.dishes);
-            setGuestInputFields(singleEvent.guests);
-            setEventState(singleEvent);
+            setEventState(singleEvent)
         }
-        console.log(singleEvent, dishInputFields, guestInputFields);
-    }, [singleEvent, id]);
+        // console.log(eventState);
+    }, [singleEvent]);
 
     return (
         <div className="potluckbackground">
