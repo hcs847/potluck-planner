@@ -35,7 +35,9 @@ query event($eventId: ID!) {
     }
     guests
     dishes {
+        _id
         dishType
+        dishName
         provider
     }
   }
@@ -45,11 +47,23 @@ query event($eventId: ID!) {
 export const QUERY_DISH = gql`
 query dish($dishId: String!) {
     dish(dishId: $dishId){
-        _id
+    _id
     provider
     dishName
     dishType
   }
+  }
+`;
+
+export const QUERY_USER = gql`
+  query user($userId: ID!) {
+    user(userId: $userId) {
+    _id
+    firstName
+    lastName
+    email
+      
+    }
   }
 `;
 

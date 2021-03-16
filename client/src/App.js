@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
-import { GlobalProvider } from './utils/GlobalState';
+// import { GlobalProvider } from './utils/GlobalState';
 import Landing from './pages/Landing';
 import Home from './pages/Home';
 import PlanEvent from './pages/PlanEvent';
@@ -30,19 +30,17 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div className="App">
-          <GlobalProvider>
-            <Nav />
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/home" component={Home} />
-              {/* enabling an option user params for event id */}
-              <Route exact path="/potluck/:eventId?" component={PlanEvent} />
-              <Route exact path="/event/:eventId" component={Event} />
-              <Route exact path="/recipes" component={Recipes} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/login" component={Login} />
-            </Switch>
-          </GlobalProvider>
+          <Nav />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/home" component={Home} />
+            {/* enabling an option user params for event id */}
+            <Route exact path="/potluck/:eventId?" component={PlanEvent} />
+            <Route exact path="/event/:eventId" component={Event} />
+            <Route exact path="/recipes" component={Recipes} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+          </Switch>
         </div>
       </Router>
     </ApolloProvider>
