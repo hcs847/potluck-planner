@@ -49,28 +49,37 @@ export const ADD_EVENT = gql`
         _id
         eventName
         location
-        host 
-        guests 
-        dishes 
+      
   } 
 }
 `;
 
+export const DELETE_EVENT = gql`
+mutation deleteEvent(
+    $eventId:ID!
+    ) {
+        deleteEvent(
+            eventId: $eventId) {
+      _id
+      eventName
+      
+    }
+  }
+  `;
+
 export const ASSIGN_DISH = gql`
   mutation updateDish(
-      $eventId: ID,
-      $dishName: String
+      $dishId: String!,
+      $dishName: String!
      ) {
         updateDish(
-        eventId: $eventId,
+        dishId: $dishId,
         dishName: $dishName
       ) {
         _id
-    eventName
-    location
-    host
-    guests
-    dishes 
+        provider
+        dishName
+        dishType
       }
 }
 `;
