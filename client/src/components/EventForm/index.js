@@ -130,115 +130,120 @@ const EventForm = () => {
 
     return (
         <>
-            {
-                !id && (
-                    <form onSubmit={handleSubmitEventForm}>
-                        {error && <span>Something went wrong...</span>}
-                        <div>
-                            <label htmlFor="eventName">Event Name:</label>
-                            <input
-                                placeholder="Event's name"
-                                name="eventName"
-                                type="text"
-                                value={eventState.eventName}
-                                onChange={handleChangeEventForm}
-                            />
-                        </div>
-                        <br />
-                        <div>
-                            <label htmlFor="message">Welcome message for guests</label>
-                            <textarea
-                                placeholder="Welcome message:"
-                                name="message"
-                                type="text"
-                                value={eventState.message}
-                                onChange={handleChangeEventForm}
-                            />
-                        </div>
-                        <br />
-                        <div>
-                            <label htmlFor="date">Event date:</label>
-                            <input
-                                placeholder="Event's date"
-                                name="date"
-                                type="date"
-                                value={eventState.date}
-                                onChange={handleChangeEventForm}
-                            />
-                        </div>
-                        <br />
-                        <div>
-                            <label htmlFor="time">Time:</label>
-                            <input
-                                placeholder="Event's time"
-                                name="time"
-                                type="time"
-                                value={eventState.time}
-                                onChange={handleChangeEventForm}
-                            />
-                        </div>
-                        <br />
-                        <div>
-                            <label htmlFor="location">Location:</label>
-                            <input
-                                placeholder="Event's location"
-                                name="location"
-                                type="text"
-                                value={eventState.location}
-                                onChange={handleChangeEventForm}
-                            />
-                        </div>
-                        <br />
-                        <p style={{ fontWeight: '700' }}>Dishes to Share:</p>
-                        {dishInputFields.map((dishInputField, i) =>
-                            (
-                                <div key={`dish${i}${dishInputFields.indexOf(dishInputField)}`}>
-                                    <label htmlFor="dishType">Dish Type:</label>
-                                    <input
-                                        placeholder="Dish Type"
-                                        name="dishType"
+            <div className="potluckbackground">
+                <div className="potluckorange">
+                    {
+                        !id && (
+                            <form onSubmit={handleSubmitEventForm}>
+                                {error && <span>Something went wrong...</span>}
+                                <div>
+                                    <label className="potluckform" htmlFor="eventName">Event Name:</label>
+                                    <input className="forminput"
+                                        placeholder="Event's name"
+                                        name="eventName"
                                         type="text"
-                                        value={dishInputField.dishType}
-                                        onChange={(e) => handleChangeInputFields(i, e, dishInputFields, setDishInputFields, 'dishes')}
+                                        value={eventState.eventName}
+                                        onChange={handleChangeEventForm}
                                     />
-                                    <button onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType')}>+ Add More Dishes</button>
-                                    <button>- Remove Dish</button>
-                                    <br />
                                 </div>
-                            )
-                        )}
+                                <br />
+                                <div>
+                                    <label className="potluckform" htmlFor="message">Welcome message for guests</label>
+                                    <textarea
+                                        placeholder="Welcome message:"
+                                        name="message"
+                                        type="text"
+                                        value={eventState.message}
+                                        onChange={handleChangeEventForm}
+                                    />
+                                </div>
+                                <br />
+                                <div>
+                                    <label className="potluckform" htmlFor="date">Event date:</label>
+                                    <input className="forminput"
+                                        placeholder="Event's date"
+                                        name="date"
+                                        type="date"
+                                        value={eventState.date}
+                                        onChange={handleChangeEventForm}
+                                    />
+                                </div>
+                                <br />
+                                <div>
+                                    <label className="potluckform" htmlFor="time">Time:</label>
+                                    <input className="forminput"
+                                        placeholder="Event's time"
+                                        name="time"
+                                        type="time"
+                                        value={eventState.time}
+                                        onChange={handleChangeEventForm}
+                                    />
+                                </div>
+                                <br />
+                                <div>
+                                    <label className="potluckform" htmlFor="location">Location:</label>
+                                    <input className="forminput"
+                                        placeholder="Event's location"
+                                        name="location"
+                                        type="text"
+                                        value={eventState.location}
+                                        onChange={handleChangeEventForm}
+                                    />
+                                </div>
+                                <br />
+                                <p className="potluckformheader" style={{ fontWeight: '700' }}>Dishes to Share:</p>
+                                {dishInputFields.map((dishInputField, i) =>
+                                    (
+                                        <div key={`dish${i}${dishInputFields.indexOf(dishInputField)}`}>
+                                            <label className="potluckform" htmlFor="dishType">Dish Type:</label>
+                                            <input className="forminput"
+                                                placeholder="Dish Type"
+                                                name="dishType"
+                                                type="text"
+                                                value={dishInputField.dishType}
+                                                onChange={(e) => handleChangeInputFields(i, e, dishInputFields, setDishInputFields, 'dishes')}
+                                            />
+                                            <button className="btn" onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType')}>+ Add More Dishes</button>
+                                            <button className="btn">- Remove Dish</button>
+                                            <br />
+                                        </div>
+                                    )
+                                )}
 
-                        <p style={{ fontWeight: '700' }}>Guests to Invite:</p>
-                        {guestInputFields.map((guestInputField, i) =>
-                            (
-                                <div key={`guest${i}${guestInputFields.indexOf(guestInputField)}`}>
-                                    <label htmlFor="guestEmail">Guest Email:</label>
-                                    <input
-                                        placeholder="Guest Email"
-                                        name="guestEmail"
-                                        type="email"
-                                        value={guestInputField}
-                                        onChange={(e) => handleChangeGuestInputFields(i, e)}
-                                    />
-                                    <button onClick={(e) => handleAddGuestInputFields(e)}>+ Add More Guests</button>
-                                    <button>- Remove Guest</button>
-                                    <br />
-                                </div>
-                            )
-                        )}
-                        <br />
-                        <button
-                            type="submit"
-                        >
-                            Create Event
+                                <p className="potluckformheader" style={{ fontWeight: '700' }}>Guests to Invite:</p>
+                                {guestInputFields.map((guestInputField, i) =>
+                                    (
+                                        <div key={`guest${i}${guestInputFields.indexOf(guestInputField)}`}>
+                                            <label className="potluckform" htmlFor="guestEmail">Guest Email:</label>
+                                            <input className="forminput"
+                                                placeholder="Guest Email"
+                                                name="guestEmail"
+                                                type="email"
+                                                value={guestInputField}
+                                                onChange={(e) => handleChangeGuestInputFields(i, e)}
+                                            />
+                                            <button className="btn" onClick={(e) => handleAddGuestInputFields(e)}>+ Add More Guests</button>
+                                            <button className="btn">- Remove Guest</button>
+                                            <br />
+                                        </div>
+                                    )
+                                )}
+                                <br />
+                                <button
+                                    className="submitbutton"
+                                    type="submit"
+                                >
+                                    Create Event
                         </button>
-                    </form>
-                )
-            }
+                            </form>
+                        )
+                    }
+                </div>
+            </div>
             {
                 eventId && (
                     <Link to={`/event/${eventId}`}>
-                        <button style={{ color: "navy", fontWeight: '700', fontSize: "1rem", width: "16vw", margin: "0.5rem" }}>
+                        <button className="btn" style={{ color: "navy", fontWeight: '700', fontSize: "1rem", width: "16vw", margin: "0.5rem" }}>
                             Review Event
                 </button>
                     </Link>
@@ -254,8 +259,8 @@ const EventForm = () => {
                         <form>
                             <h3>Update your event</h3>
 
-                            <button>Submit Changes</button>
-                            <button>Delete Event</button>
+                            <button className="submitbutton">Submit Changes</button>
+                            <button className="btn">Delete Event</button>
                         </form>
                     </>
 
