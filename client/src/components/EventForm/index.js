@@ -3,19 +3,19 @@ import { Link, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { ADD_EVENT, DELETE_EVENT, UPDATE_EVENT } from '../../utils/mutations';
 import { QUERY_EVENT } from '../../utils/queries';
+import { HiUserRemove, HiUserAdd, HiPlusCircle, HiMinusCircle } from "react-icons/hi";
 
 const EventForm = () => {
-    // event id for update form option 
+    // getting event id from the url for update form option 
     const { eventId: id } = useParams();
     const { data } = useQuery(QUERY_EVENT, {
         variables: { eventId: id }
     })
 
-    // fetch single event from db once available
+    // get single event from db once available
     const singleEvent = data?.event || '';
-    // console.log("singleEvent: ", singleEvent);
 
-    // addEvent function from graphql mutations functions
+    // create  event function from graphql mutations functions
     const [addEvent, { error }] = useMutation(ADD_EVENT);
 
     // delete event mutation function
@@ -42,17 +42,17 @@ const EventForm = () => {
         guests: guestInputFields || [""]
     });
 
-    // dynamic redndering of input fields for guests and dishes
+    // dynamic redndering of new input fields
     const handleChangeInputFields = (id, e, inputFields, setFieldState, array) => {
         const newInputFields = inputFields.map(field => {
-            // console.log("id", id, "field.id", field.id, "field", field, "inputFields", inputFields)
+            // extracting index instead of id since there is no id yet
             if (id === inputFields.indexOf(field)) {
                 field[e.target.name] = e.target.value
             }
             return field;
         })
         setFieldState([...newInputFields]);
-        // updating the state of the whole form
+        // updating the state of the whole form withe newly added input fields
         setEventState({
             ...eventState,
             [array]: [...newInputFields]
@@ -64,16 +64,18 @@ const EventForm = () => {
     const handleAddInputFields = (e, setFieldState, inputFields, key) => {
         e.preventDefault();
         setFieldState([...inputFields, {
+            // adding a blank field
             [key]: ''
         }])
     }
 
-    // dynamically adding new input fields for guests
+    // dynamically adding new input fields for guests, which is an array pf strings
     const handleAddGuestInputFields = (e) => {
         e.preventDefault();
         setGuestInputFields([e.target.value, ...guestInputFields]);
     }
 
+    // updating value of guests input fields per entries
     const handleChangeGuestInputFields = (id, e) => {
         const newGuestInputfields = guestInputFields.map(guest => {
             console.log("new guests", id, guestInputFields.indexOf(guest));
@@ -90,14 +92,14 @@ const EventForm = () => {
         });
     }
 
-    // dynamically removing guests/dishes input fields
+    // dynamically removing guests/dishes input fields 
     const handleRemoveInputFields = (id, setInputFields, inputFields) => {
         const newInputFields = inputFields.filter(inputField => inputFields.indexOf(inputField) !== id);
         setInputFields([...newInputFields]);
-        console.log(newInputFields);
+        // console.log(newInputFields);
     }
 
-    // handling change for basic fields within form
+    // handling change for basic key:value pairs within form
     const handleChangeEventForm = (e) => {
         const { name, value } = e.target;
         setEventState({
@@ -106,7 +108,7 @@ const EventForm = () => {
         })
     };
 
-    // store in state created event id once form is submitted
+    // store in state event id once form is submitted
     const [eventId, setEventId] = useState('');
 
     const handleSubmitEventForm = async e => {
@@ -135,7 +137,7 @@ const EventForm = () => {
                     guests: guestInputFields
                 }
             ]);
-            console.log("data, event.state when submitting", data, eventState);
+            // console.log("data, event.state when submitting", data, eventState);
 
         } catch (err) {
             console.error(err);
@@ -176,14 +178,16 @@ const EventForm = () => {
     // extract event details when eventId is available in useParams
     useEffect(() => {
         if (id) {
+            // if an id is in the url, update state for form
             setDishInputFields(singleEvent.dishes);
             setGuestInputFields(singleEvent.guests);
             setEventState(singleEvent);
         }
-        console.log(singleEvent, dishInputFields, guestInputFields);
+        // console.log(singleEvent, dishInputFields, guestInputFields);
     }, [singleEvent, id]);
 
     return (
+        // change form type to update if id is provided
         <div className="potluckbackground">
             {id ? (
                 <h3 className="potlucktitle">Update your event</h3>
@@ -194,7 +198,9 @@ const EventForm = () => {
 
             <div className="potluckorange">
 
+                {/* change the function from submit to update event when id is available */}
                 <form onSubmit={!id ? (handleSubmitEventForm) : (handleUpdateEvent)}>
+                    {/* log an error message  */}
                     {error && <span style={{ color: 'red' }}>Something went wrong...</span>}
                     <div>
                         <label className="potluckform" htmlFor="eventName">Event Name:</label>
@@ -264,8 +270,8 @@ const EventForm = () => {
                                     value={dishInputField.dishType}
                                     onChange={(e) => handleChangeInputFields(i, e, dishInputFields, setDishInputFields, 'dishes')}
                                 />
-                                <button className="btn" className="btn" type="button" onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType')}>+ Add More Dishes</button>
-                                <button className="btn" type="button" onClick={() => handleRemoveInputFields(i, setDishInputFields, dishInputFields)}>- Remove Dish</button>
+                                <button className="btn" className="btn" type="button" onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType')}><HiPlusCircle /></button>
+                                <button className="btn" type="button" onClick={() => handleRemoveInputFields(i, setDishInputFields, dishInputFields)}><HiMinusCircle /></button>
                                 <br />
                             </div>
                         )
@@ -283,8 +289,8 @@ const EventForm = () => {
                                     value={guestInputField}
                                     onChange={(e) => handleChangeGuestInputFields(i, e)}
                                 />
-                                <button className="btn" type="button" onClick={(e) => { handleAddGuestInputFields(e) }}>+ Add More Guests</button>
-                                <button className="btn" type="button" onClick={() => { handleRemoveInputFields(i, setGuestInputFields, guestInputFields) }}>- Remove Guest</button>
+                                <button className="btn" type="button" onClick={(e) => { handleAddGuestInputFields(e) }}><HiUserAdd /></button>
+                                <button className="btn" type="button" onClick={() => { handleRemoveInputFields(i, setGuestInputFields, guestInputFields) }}><HiUserRemove /></button>
                                 <br />
                             </div>
                         )
