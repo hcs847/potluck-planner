@@ -4,9 +4,9 @@ const SearchForm = ({ onSearch, onSubmit, search }) => {
 
     return (
         <div style={{ textAlign: 'center' }}>
-            <form onSubmit={onSubmit} style={{ margin: '0 auto' }}>
+            <form className="search-form" onSubmit={onSubmit}>
                 <input type='text' value={search} onChange={onSearch} />
-                <button type='submit' >
+                <button className='submitbutton' type='submit' >
                     Search
            </button>
             </form>

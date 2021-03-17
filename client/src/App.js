@@ -12,6 +12,7 @@ import Recipes from './pages/Recipes';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Nav from './components/Nav';
+import Footer from './components/Footer';
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -29,18 +30,23 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="App">
-          <Nav />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/home" component={Home} />
-            {/* enabling an option user params for event id */}
-            <Route exact path="/potluck/:eventId?" component={PlanEvent} />
-            <Route exact path="/event/:eventId" component={Event} />
-            <Route exact path="/recipes" component={Recipes} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/login" component={Login} />
-          </Switch>
+        <div className="page-image">
+          <div className="page-container">
+            <Nav />
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/home" component={Home} />
+                {/* enabling an option user params for event id */}
+                <Route exact path="/potluck/:eventId?" component={PlanEvent} />
+                <Route exact path="/event/:eventId" component={Event} />
+                <Route exact path="/recipes" component={Recipes} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/login" component={Login} />
+              </Switch>
+            </div>
+            <Footer />
+          </div>
         </div>
       </Router>
     </ApolloProvider>
