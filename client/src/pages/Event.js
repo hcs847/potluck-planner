@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { QUERY_EVENT } from '../utils/queries';
 import { ASSIGN_DISH } from '../utils/mutations';
@@ -74,7 +74,10 @@ const Event = () => {
                     ))
                     }
 
-                    <button style={{ margin: '1rem' }}>Update form</button>
+
+                    <Link to={`/potluck/${eventId}`}>
+                        <button className="btn">Update Event</button>
+                    </Link>
                 </>
             )}
         </>

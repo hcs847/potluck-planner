@@ -38,10 +38,12 @@ const Recipes = () => {
 
     return (
         <div className="recipesbackground">
-            <h1 className="recipestitle">Inspiration</h1>
+            <div className="title-container">
+                <h1 className="recipestitle">Inspiration</h1>
+            </div>
             <div>
-                < SearchForm style={{ margin: '0 auto' }} onSearch={handleSearch} search={search} onSubmit={handleSubmit} />
-                <div style={{ display: 'flex', justifyContent: "space-between", flexWrap: 'wrap', maxWidth: '75vw', margin: '0 auto' }}>
+                < SearchForm class='recipes-form' onSearch={handleSearch} search={search} onSubmit={handleSubmit} />
+                <div className='recipes-container'>
                     {recipes.map(recipe => (
                         < Recipe
                             image={recipe.recipe.image}

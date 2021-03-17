@@ -1,3 +1,15 @@
+:root {
+  --orange: #DD6B23;
+  --blue-grey: #19424B;
+  --red-orange: #752C09;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Lora', serif;
@@ -5,7 +17,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.4;
   color: navy;
-  margin-top: 0;
+ 
 }
 
 img {
@@ -15,19 +27,24 @@ img {
 .navbar {
   background-image: url('../src/images/Nav.jpg');
   background-size: cover;
-  position: absolute;
-  max-height: 20vh;
+  /* position: absolute; */
+  min-height: 15vh;
   z-index: 0;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+
 }
 
 .navlist {
   display: block;
-  float: right;
+  margin-right: 1rem;
 }
 
 .navlink {
@@ -88,19 +105,64 @@ img {
 }
 
 .recipesbackground {
-  background-image: url('../src/images/recipes2.jpg');
+  background-color: rgba(255, 255, 255, 0.1);
+  /* position: relative;
+  height: 100%; */
+  /* background-repeat: no-repeat;
+  background-size: cover; */
+}
+
+form.search-form {
+  margin: 1rem auto;
+  max-width: 20vw;
+  display: flex;
+}
+
+form.search-form input[type='text'] {
+  flex-basis: 75%;
+}
+
+form.search-form button {
+  flex-basis: 25%;
+  border: none;
+  margin: 0;
+  background-color: var(--blue-grey);
+  padding: 0.1rem;
+}
+
+
+a.recipe-txt {
+  display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 33ch;
+    text-decoration: none;
+    font-weight: 800;
+    cursor: pointer;
+    color:var(--red-orange);
+}
+
+.potluckbackground {
+  /* background-image: url('../src/images/invites2.jpg'); */
+  background-color: rgba(255, 255, 255, .15);
   position: relative;
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.potluckbackground {
-  background-image: url('../src/images/invites2.jpg');
-  position: relative;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
+.recipes-container {
+  display: flex; 
+  justify-content: "space-between";
+  flex-wrap: wrap; 
+  max-width: 75vw;
+  margin: 0 auto; 
+  gap: 2rem;
+}
+
+.recipes-container > * {
+  flex-basis: 30%;
 }
 
 .potluckorange {
@@ -152,19 +214,49 @@ img {
   color: gray;
 }
 
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
 .recipestitle {
   color: rgba(235, 125, 52);
-  background-color: rgba(255, 255, 255, .6);
+  position: relative;
+  background-color: rgba(255, 255, 255, .95);
   text-align: center;
   align-items: center;
   font-size: 2.5rem;
   font-weight: bold;
   align-content: center;
   margin-top: inherit;
+  margin: 0 auto;
+  padding: 0.1rem 0.4rem;
+}
+
+.recipestitle:after {
+  content: '';
+  position: absolute;
+  height: 6px;
+  bottom:-4px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--blue-grey);
+}
+
+.page-container {
+display: flex;
+justify-content: flex-start;
+flex-direction: column;
+gap:1rem;
+min-height: 100vh;
 }
 
 .container {
   width: 95%;
+  max-width: 1200px;
+  margin: auto;
+  
 }
 
 main {
@@ -179,11 +271,8 @@ footer {
   margin-top: auto;
 }
 
-footer a {
-  font-size: 2rem;
-}
 
-h1 {}
+h1 {font-size: 3rem;}
 
 h2 {
   font-family: 'Lora', serif;
@@ -191,7 +280,7 @@ h2 {
   font-size: 2rem;
 }
 
-h3 {}
+h3 {font-size: 2.5rem;}
 
 .btn {
   border-radius: 0.3rem;
@@ -219,11 +308,47 @@ h3 {}
   margin: 0 0 .8rem 1rem;
 }
 
-footer {
+.footer {
+  margin-top: auto;
+  background-image: url('../src/images/footer.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  max-height: 10vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+
+footer h2, nav h1 {
+  font-size: 3rem; 
+  margin-right: auto;
+  margin-left: 1rem;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 0.2rem;
+  overflow: hidden;
+}
+
+nav h1 {
+  margin-right: 1rem;
+}
+
+.logo {
+  max-width: 10%;
+  align-self: center;
+  /* margin-bottom: 2vh;
+  margin-right: -2vh; */
+  overflow: hidden;
+}
+
+.img-footer {
+  position: relative;
   margin-top: auto;
 }
 
-footer a {
-  font-size: 2rem;
+.page-image {
+  background-image: url('../src/images/recipes2.jpg');
+  background-size: cover;
+  height: 100vh;
 }
-
