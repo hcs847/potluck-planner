@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { ADD_EVENT, DELETE_EVENT } from '../../utils/mutations';
+import { ADD_EVENT, DELETE_EVENT, UPDATE_EVENT } from '../../utils/mutations';
 import { QUERY_EVENT } from '../../utils/queries';
 
 const EventForm = () => {
@@ -18,8 +18,11 @@ const EventForm = () => {
     // addEvent function from graphql mutations functions
     const [addEvent, { error }] = useMutation(ADD_EVENT);
 
-    // delet event mutation 
+    // delete event mutation function
     const [deleteEvent, { error: deleteError }] = useMutation(DELETE_EVENT);
+
+    // update event mutation function
+    const [updateEvent, { error: updateError }] = useMutation(UPDATE_EVENT);
 
     // state for dynamic input fields for dishes and guests arrays
     const dishObj = {
@@ -94,8 +97,6 @@ const EventForm = () => {
         console.log(newInputFields);
     }
 
-
-
     // handling change for basic fields within form
     const handleChangeEventForm = (e) => {
         const { name, value } = e.target;
@@ -141,6 +142,22 @@ const EventForm = () => {
         }
     };
 
+    //  update an event
+    const handleUpdateEvent = async e => {
+        e.preventDefault();
+        console.log("id", id, "eventstate from Update:", eventState, "single event:", singleEvent);
+        // try {
+        //     await updateEvent({
+        //         variables: { ...eventState, eventId: id }
+        //     });
+        //     console.log("id from update: ", id)
+        //     //    Redirect to home
+        //     setTimeout(() => { window.location.assign('/home') }, 2000);
+        // } catch (err) {
+        //     console.log(err);
+        // }
+    }
+
     // delete an event
     const handleDeleteEvent = async e => {
         e.preventDefault();
@@ -149,7 +166,7 @@ const EventForm = () => {
                 variables: { eventId: id }
             });
             //    Redirect to homepage
-            setTimeout(() => { window.location.assign('/potluck') }, 2000);
+            setTimeout(() => { window.location.assign('/home') }, 2000);
 
         } catch (err) {
             console.error(err);
@@ -177,7 +194,7 @@ const EventForm = () => {
 
             <div className="potluckorange">
 
-                <form onSubmit={handleSubmitEventForm}>
+                <form onSubmit={!id ? (handleSubmitEventForm) : (handleUpdateEvent)}>
                     {error && <span style={{ color: 'red' }}>Something went wrong...</span>}
                     <div>
                         <label className="potluckform" htmlFor="eventName">Event Name:</label>

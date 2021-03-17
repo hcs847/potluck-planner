@@ -13,7 +13,8 @@ const Home = () => {
 
     return (
         <>
-            <div className="eventbackground">
+            {/* <div className="eventbackground"> */}
+            <div className="">
                 <div className="eventorange">
                     <h2>Your Events</h2>
                     <ul className="eventlist" style={{ listStyle: "none" }}>

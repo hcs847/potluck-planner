@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
-input DishInput {
+input DishInput {  
   provider: String
   dishName: String
   dishType: String
