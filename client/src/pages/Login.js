@@ -32,7 +32,7 @@ const Login = (event) => {
 
     return (
         <>
-            <div className="loginbackground">
+            <div className="loginbackground flex-col">
                 <h2>Sign In</h2>
                 <form onSubmit={handleFormSubmit}>
                     <div>
