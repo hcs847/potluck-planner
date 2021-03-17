@@ -181,7 +181,7 @@ const EventForm = () => {
                     {error && <span style={{ color: 'red' }}>Something went wrong...</span>}
                     <div>
                         <label className="potluckform" htmlFor="eventName">Event Name:</label>
-                        <input
+                        <input className="forminput"
                             placeholder="Event's name"
                             name="eventName"
                             type="text"
