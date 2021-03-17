@@ -9,12 +9,12 @@ const Recipes = () => {
     // store searched term from input field
     const [search, setSearch] = useState('');
 
-    // storing the search value entered in input field
+    // updating state of search value entered in input field
     const handleSearch = (e) => {
         setSearch(e.target.value);
     };
 
-    // passing the final search value once search is clicked
+    // passing the final search value state once search button is clicked
     // clearing the input field after submitting
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,16 +25,15 @@ const Recipes = () => {
     const getRecipes = async () => {
         const response = await fetch(`https://api.edamam.com/search?q=${searchTerm}&app_id=${process.env.REACT_APP_APP_ID}&app_key=${process.env.REACT_APP_APP_KEY}&from=0&to=6`);
         const data = await response.json();
-        // console.log(recipes.hits[0].recipe.image);
         setRecipes(data.hits);
     }
 
+    // storing api response in state 
     const [recipes, setRecipes] = useState([]);
-    // render when search term is changing
+    // triggering re-render when search term is changing
     useEffect(() => {
         getRecipes();
-        // console.log(searchTerm);
-    }, [searchTerm, getRecipes]);
+    }, [searchTerm]);
 
     return (
         <div className="recipesbackground">
@@ -45,6 +44,7 @@ const Recipes = () => {
                 < SearchForm class='recipes-form' onSearch={handleSearch} search={search} onSubmit={handleSubmit} />
                 <div className='recipes-container'>
                     {recipes.map(recipe => (
+                        // rendering each recipe with component
                         < Recipe
                             image={recipe.recipe.image}
                             url={recipe.recipe.url}
