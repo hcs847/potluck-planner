@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import Recipe from '../components/Recipe';
 import SearchForm from '../components/SearchForm';
+import Auth from '../utils/auth';
 require('dotenv').config();
+
 
 const Recipes = () => {
     // store submitted search term for api fetch
@@ -34,6 +37,11 @@ const Recipes = () => {
     useEffect(() => {
         getRecipes();
     }, [searchTerm]);
+
+    // check if user is loggedin or direct to landing page
+    if (!Auth.loggedIn()) {
+        return (<Redirect to='/' />)
+    };
 
     return (
         <div className="recipesbackground">
