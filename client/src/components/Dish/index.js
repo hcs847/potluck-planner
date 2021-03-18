@@ -21,11 +21,9 @@ function Dish({ dish, submitDish, changeDish, dishToBring }) {
         <>
             {dish.dishType && (
 
-                <li style={{
-                    display: "flex", justifyContent: "space-around", width: "33vw"
-                }}><span>{dish.dishType}</span>
+                <li className='dish flex-around'><span className='dish-type'>{dish.dishType}</span>
                     {!dish.provider && !toggleSignup && (
-                        <button onClick={handleSignupState}>SignUp</button>
+                        <button className='btn' onClick={handleSignupState}>SignUp</button>
                     )}
                     {/* after clicking on signup, form to enter dish to bring */}
                     {toggleSignup && !dish.dishName && (
@@ -39,9 +37,10 @@ function Dish({ dish, submitDish, changeDish, dishToBring }) {
                                 type='submit'>Add Dish</button>
                         </form>
                     )}
-                    <span>Dish Name: {dish.dishName}</span>
-                    <span>Provider: {userId ? dishProvider.firstName : ''}</span>
-
+                    <div style={{ flexBasis: '48%' }} className="dish-signed flex-around">
+                        <span>Dish Name: </span><p>{dish.dishName}</p>
+                        <span>Provider: </span><p>{userId ? dishProvider.firstName : ''}</p>
+                    </div>
                 </li>
             )}
 
