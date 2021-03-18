@@ -11,7 +11,7 @@ import Event from './pages/Event';
 import Recipes from './pages/Recipes';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Nav from './components/Nav';
+import Header from './components/Header';
 import Footer from './components/Footer';
 
 const client = new ApolloClient({
@@ -32,8 +32,8 @@ function App() {
       <Router>
         <div className="page-image">
           <div className="page-container">
-            <Nav />
-            <div className="container">
+            <Header />
+            <div className="main-container">
               <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/home" component={Home} />
