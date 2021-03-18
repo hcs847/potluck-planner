@@ -33,7 +33,7 @@ function Dish({ dish, submitDish, changeDish, dishToBring }) {
                                 type="text"
                                 value={dishToBring}
                                 onChange={changeDish} />
-                            <button
+                            <button className='btn'
                                 type='submit'>Add Dish</button>
                         </form>
                     )}

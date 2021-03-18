@@ -72,13 +72,14 @@ const EventForm = () => {
     // dynamically adding new input fields for guests, which is an array pf strings
     const handleAddGuestInputFields = (e) => {
         e.preventDefault();
-        setGuestInputFields([e.target.value, ...guestInputFields]);
+        // spreading the previous guest fields entered and adding a new blank field
+        setGuestInputFields([...guestInputFields, ""]);
     }
 
     // updating value of guests input fields per entries
     const handleChangeGuestInputFields = (id, e) => {
         const newGuestInputfields = guestInputFields.map(guest => {
-            console.log("new guests", id, guestInputFields.indexOf(guest));
+            // console.log("new guests", id, guestInputFields.indexOf(guest));
             if (id === guestInputFields.indexOf(guest)) {
                 return e.target.value;
             }
@@ -168,7 +169,7 @@ const EventForm = () => {
                 variables: { eventId: id }
             });
             //    Redirect to homepage
-            setTimeout(() => { window.location.assign('/home') }, 2000);
+            setTimeout(() => { window.location.assign('/home') }, 1000);
 
         } catch (err) {
             console.error(err);
@@ -276,7 +277,7 @@ const EventForm = () => {
                             </div>
                         )
                     )}
-                    <br/>
+                    <br />
                     <p className="potluckformheader" style={{ fontWeight: '700' }}>Guests to Invite:</p>
                     {guestInputFields?.map((guestInputField, i) =>
                         (
