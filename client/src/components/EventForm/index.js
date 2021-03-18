@@ -270,7 +270,7 @@ const EventForm = () => {
                             </div>
                         )
                     )}
-
+                    <br/>
                     <p className="potluckformheader" style={{ fontWeight: '700' }}>Guests to Invite:</p>
                     {guestInputFields?.map((guestInputField, i) =>
                         (
