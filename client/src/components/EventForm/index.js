@@ -204,7 +204,7 @@ const EventForm = () => {
                     {error && <span style={{ color: 'red' }}>Something went wrong...</span>}
                     <div>
                         <label className="potluckform" htmlFor="eventName">Event Name:</label>
-                        <input
+                        <input className="forminput"
                             placeholder="Event's name"
                             name="eventName"
                             type="text"
@@ -276,7 +276,7 @@ const EventForm = () => {
                             </div>
                         )
                     )}
-
+                    <br/>
                     <p className="potluckformheader" style={{ fontWeight: '700' }}>Guests to Invite:</p>
                     {guestInputFields?.map((guestInputField, i) =>
                         (

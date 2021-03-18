@@ -51,6 +51,8 @@ justify-content: space-around;
   display: flex;
   justify-content: right;
   align-items: center;
+  color: navy;
+
 }
 
 img {
@@ -117,6 +119,7 @@ a  {
   padding: .5rem;
   border-radius: .2rem;
   font-size: large;
+  font-weight: bold;
 }
 
 .eventorange { 
@@ -385,7 +388,7 @@ a.recipe-txt {
 
 .potlucktitle {
   color: rgba(235, 125, 52);
-  background-color: rgba(255, 255, 255, .6);
+  background-color: rgba(255, 255, 255, .8);
   text-align: center;
   align-items: center;
   font-size: 2.5rem;
@@ -496,6 +499,11 @@ h3 {
   font-size: 1.3rem;
   border-radius: .3rem;
   margin: 0 0 .8rem 1rem;
+  font-family: 'Lora', serif;
+}
+
+.submitbutton:hover {
+  font-weight: bold;
 }
 
 .footer {
