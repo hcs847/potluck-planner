@@ -8,7 +8,7 @@ const Home = () => {
     const events = data?.events || [];
 
     if (!events?.length) {
-        return <h3>There are no Upcoming Events.</h3>
+        return <h3>There are no upcoming events.</h3>
     }
 
     return (
