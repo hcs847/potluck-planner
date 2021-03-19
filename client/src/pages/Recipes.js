@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const Recipes = () => {
     // store submitted search term for api fetch
-    const [searchTerm, setSearchterm] = useState('nachos');
+    const [searchTerm, setSearchterm] = useState('sushi');
     // store searched term from input field
     const [search, setSearch] = useState('');
 
@@ -38,7 +38,7 @@ const Recipes = () => {
         getRecipes();
     }, [searchTerm]);
 
-    // check if user is loggedin or direct to landing page
+    // check if user is loggedin or redirect to landing page
     if (!Auth.loggedIn()) {
         return (<Redirect to='/' />)
     };

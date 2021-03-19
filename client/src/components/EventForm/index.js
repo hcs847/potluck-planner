@@ -190,12 +190,14 @@ const EventForm = () => {
     return (
         // change form type to update if id is provided
         <div className="potluckbackground">
-            {id ? (
-                <h3 className="potlucktitle">Update your event</h3>
-            ) : (
-                    <h1 className="potlucktitle">Create a Potluck Event</h1>
-                )
-            }
+            <div className="title-container">
+                {id ? (
+                    <h3 className="potlucktitle">Update your event</h3>
+                ) : (
+                        <h1 className="potlucktitle">Create a Potluck Event</h1>
+                    )
+                }
+            </div>
 
             <div className="potluckorange">
 
