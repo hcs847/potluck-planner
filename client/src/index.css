@@ -51,6 +51,8 @@ justify-content: space-around;
   display: flex;
   justify-content: right;
   align-items: center;
+  color: navy;
+
 }
 
 img {
@@ -88,6 +90,11 @@ a  {
   display: flex;
   list-style: none;
   margin-right: 1rem;
+  gap: 1rem;
+}
+
+.logout-nav {
+  margin-left: auto;
 }
 
 .navlink {
@@ -117,15 +124,16 @@ a  {
   padding: .5rem;
   border-radius: .2rem;
   font-size: large;
+  font-weight: bold;
 }
 
 .eventorange { 
-  margin: 0 auto;
+  margin: auto;
   position: relative;
   padding: 5em 5em;
   background-color: rgba(255, 255, 255, .7);
   border-radius: 50%;
-  max-width: 70%;
+  max-width: 50vw;
   display: flex;
   flex-direction: column;
 
@@ -385,7 +393,7 @@ a.recipe-txt {
 
 .potlucktitle {
   color: rgba(235, 125, 52);
-  background-color: rgba(255, 255, 255, .6);
+  background-color: rgba(255, 255, 255, .8);
   text-align: center;
   align-items: center;
   font-size: 2.5rem;
@@ -496,6 +504,11 @@ h3 {
   font-size: 1.3rem;
   border-radius: .3rem;
   margin: 0 0 .8rem 1rem;
+  font-family: 'Lora', serif;
+}
+
+.submitbutton:hover {
+  font-weight: bold;
 }
 
 .footer {
@@ -506,7 +519,7 @@ h3 {
   max-height: 10vh;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  /* align-items: center; */
   position: relative;
 
 }
