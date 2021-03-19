@@ -44,7 +44,7 @@ const Event = () => {
         }
     }
 
-    // check if user is loggedin or direct to landing page
+    // check if user is loggedin or redirect to landing page
     if (!Auth.loggedIn()) {
         return (<Redirect to='/' />)
     };
