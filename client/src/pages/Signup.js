@@ -37,7 +37,7 @@ const Signup = () => {
             <div className='login-join-background flex-col'>
                 <h2>Signup</h2>
                 <form className='form-center' onSubmit={handleFormSubmit}>
-                    <div>
+                    <div className='login-join-field'>
                         <label htmlFor="firstName">First Name:</label>
                         <input
                             placeholder="First"
@@ -47,7 +47,7 @@ const Signup = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div>
+                    <div className='login-join-field'>
                         <label htmlFor="lastName">Last Name:</label>
                         <input
                             placeholder="Last"
@@ -57,7 +57,7 @@ const Signup = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div>
+                    <div className='login-join-field'>
                         <label htmlFor="email">Email:</label>
                         <input
                             placeholder="youremail@email.com"
@@ -67,20 +67,20 @@ const Signup = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div>
+                    <div className='login-join-field'>
                         <label htmlFor="pwd">Password:</label>
                         <input
                             placeholder="******"
                             name="password"
-                            type="text"
+                            type="password"
                             id="pwd"
                             onChange={handleChange} />
                     </div>
                     <div>
-                        <button className='submitbutton' type="submit">Join</button>
+                        <button className='btn' type="submit">Join</button>
                     </div>
                 </form>
-                <div>
+                <div className='login-switch'>
                     Already on Potluck Planner? <Link to="/login"> Sign in</Link>
                 </div>
             </div>

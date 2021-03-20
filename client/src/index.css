@@ -27,6 +27,14 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+
+.blue-background {
+  background-color: var(--blue-grey) !important;
+  color:white !important;
+  font-weight: bolder;
+  font-family: 'Playfair Display'!important;
+}
+
 .flex {
   display: flex;;
 }
@@ -94,6 +102,7 @@ img {
 
 a  {
   text-decoration: none;
+  font-weight: bolder;
 }
 .navlist {
   display: flex;
@@ -211,12 +220,22 @@ a  {
 
 .login-join-background {
   background-image: linear-gradient(0deg,var(--orange) 0%, var(--peach) 60%);
-  max-width: 20vw;
-  border-radius: 0.6rem;
-  gap: 0.5rem;
-  padding: 0.8rem;
-  color:white;
+  max-width: 35%;
+    border-radius: 0.6rem;
+    padding: 0.8rem;
 }
+
+.login-join-field {
+  font:1rem;
+  line-height: 1.375rem;
+  min-height: 2.8rem;
+  padding: 0 .625rem;
+}
+
+.login-switch {
+  font-size: 1.2rem;
+}
+
 
 .recipesbackground {
   background-color: rgba(255, 255, 255, 0.2);
@@ -247,10 +266,10 @@ content: '';
 position: absolute;
 background-image: linear-gradient(65deg,rgba(255, 255, 255, .6) 45%, rgba(221,107,35,0.6) 30%);
 width: calc(100% + 2rem);
-  top: -.1em;
-  bottom: -.15em;
-  left: -6rem;
-  z-index: -1;
+top: -.1em;
+bottom: -.15em;
+left: -6rem;
+z-index: -1;
 }
 
 .event-page {
@@ -450,17 +469,23 @@ a.recipe-txt {
   align-content: center;
   margin-top: inherit;
 }  */
-
+label.potluckform {
+  width: 50%;
+}
 input.forminput,
-textarea.forminput {
-  
+textarea.forminput ,
+input {
     float: right;
     width: 45%;
     font-family: 'Lora';
     color: rgb(97, 96, 96);
     font-size: 1rem;
-    line-height: 1.3;
     margin-bottom: 0.1rem;
+    border: solid 1px gray;
+    border-radius: 0.5rem;
+    line-height: 1.375rem;
+    min-height: 2.6rem;
+    padding: 0 .625rem;   
 }
 
 .title-container {
@@ -541,28 +566,43 @@ h3 {
 .btn {
   border-radius: 0.3rem;
   cursor: pointer;
-  /*margin: 0 0 0 1rem;*/
-  margin: 0 0 0 1rem;
-  /*width: 40%;*/
+  /* margin: 0 0 0 1rem; */
+  border-radius: 0.6rem;
+  width: 100%;
   background-color: white;
   color: var(--orange);
   border-color: white;
-  font-family: 'Lora', serif;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  min-height: 2.6rem;
+  padding: 0 .625rem;
+}
+
+.btn.icon {
+  width: 3rem;
+  color:white;
+  background-color: transparent;
+  font-size: 3rem;
+  padding: 0.2rem;
+  border: none;
+  vertical-align: middle;
 }
 
 .btn:hover {
   font-weight: bold;
 }
 
-.submitbutton, .login-join-button {
+.submitbutton {
   cursor: pointer;
   background-color: var(--orange);
   color: white;
   border-color:  var(--orange);
   font-size: 1.3rem;
   border-radius: .3rem;
-  margin: 0 0 .8rem 1rem;
+  /* margin: 0 0 .8rem 1rem; */
   font-family: 'Lora', serif;
+  padding: 0 .625rem;
+  width: 100%;
 }
 
 .submitbutton:hover {
@@ -655,3 +695,71 @@ footer h2 {
     position: absolute;
 }
 
+/* media quries 
+=============== */
+
+@media(max-width: 500px) {
+  .navlink {
+    font-size:0.9rem;
+  }
+  h1 {
+    font-size:3.5rem;
+  }
+  h2 {
+    font-size: 2.5rem;;
+  }
+
+  .recipestitle, .potlucktitle, .events-title {
+    font-size: 1.6rem;
+
+  }
+
+  .header h1 {
+    font-size: 1.5em;
+    margin-right: 0.1rem;
+    padding: 0 5% 0 5%;
+    max-width: 35%;
+  }
+  footer h2 {
+    margin-left: 0.5rem;
+    font-size:1.6rem;
+    padding: 2% 0 2% 0;
+  }
+
+  .logo {
+    max-width:30%;
+  }
+
+  .potluckform {
+    font-size: 1rem;
+  }
+
+  .btn.icon {
+    width:2rem;
+    font-size:2rem;
+  }
+
+  form.search-form {
+    max-width:85%;
+  }
+
+  .events-container {
+    width: 95%;
+    margin: 0 auto;
+    top:auto;
+    bottom:auto;
+    right:auto;
+    left:auto;
+    position: relative;
+  }
+  
+    .eventlist {
+    line-height: 1.3;
+    font-size: 1rem;
+  }
+  .eventlist > a li {
+    width: 100%;
+    font-size: 1.rem;
+  }
+
+}

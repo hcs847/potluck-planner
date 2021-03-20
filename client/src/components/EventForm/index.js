@@ -198,7 +198,7 @@ const EventForm = () => {
                     )
                 }
             </div>
-
+            <br />
             <div className="potluckorange">
 
                 {/* change the function from submit to update event when id is available */}
@@ -215,7 +215,7 @@ const EventForm = () => {
                             onChange={handleChangeEventForm}
                         />
                     </div>
-                    <br />
+                    <br /> <br />
                     <div>
                         <label className="potluckform" htmlFor="message">Welcome message for guests</label>
                         <textarea className="forminput"
@@ -226,7 +226,7 @@ const EventForm = () => {
                             onChange={handleChangeEventForm}
                         />
                     </div>
-                    <br />
+                    <br /><br />
                     <div>
                         <label className="potluckform" htmlFor="date">Event date:</label>
                         <input className="forminput"
@@ -237,7 +237,7 @@ const EventForm = () => {
                             onChange={handleChangeEventForm}
                         />
                     </div>
-                    <br />
+                    <br /> <br />
                     <div>
                         <label className="potluckform" className="potluckform" htmlFor="time">Time:</label>
                         <input className="forminput"
@@ -248,7 +248,7 @@ const EventForm = () => {
                             onChange={handleChangeEventForm}
                         />
                     </div>
-                    <br />
+                    <br /><br />
                     <div>
                         <label className="potluckform" htmlFor="location">Location:</label>
                         <input className="forminput"
@@ -259,7 +259,7 @@ const EventForm = () => {
                             onChange={handleChangeEventForm}
                         />
                     </div>
-                    <br />
+                    <br /><br />
                     <p className="potluckformheader" style={{ fontWeight: '700' }}>Dishes to Share:</p>
 
                     {dishInputFields?.map((dishInputField, i) =>
@@ -273,8 +273,8 @@ const EventForm = () => {
                                     value={dishInputField.dishType}
                                     onChange={(e) => handleChangeInputFields(i, e, dishInputFields, setDishInputFields, 'dishes')}
                                 />
-                                <button className="btn" className="btn" type="button" onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType')}><HiPlusCircle /></button>
-                                <button className="btn" type="button" onClick={() => handleRemoveInputFields(i, setDishInputFields, dishInputFields)}><HiMinusCircle /></button>
+                                <button className="btn icon" type="button" onClick={(e) => handleAddInputFields(e, setDishInputFields, dishInputFields, 'dishType')}><HiPlusCircle /></button>
+                                <button className="btn icon" type="button" onClick={() => handleRemoveInputFields(i, setDishInputFields, dishInputFields)}><HiMinusCircle /></button>
                                 <br />
                             </div>
                         )
@@ -292,8 +292,8 @@ const EventForm = () => {
                                     value={guestInputField}
                                     onChange={(e) => handleChangeGuestInputFields(i, e)}
                                 />
-                                <button className="btn" type="button" onClick={(e) => { handleAddGuestInputFields(e) }}><HiUserAdd /></button>
-                                <button className="btn" type="button" onClick={() => { handleRemoveInputFields(i, setGuestInputFields, guestInputFields) }}><HiUserRemove /></button>
+                                <button className="btn icon" type="button" onClick={(e) => { handleAddGuestInputFields(e) }}><HiUserAdd /></button>
+                                <button className="btn icon" type="button" onClick={() => { handleRemoveInputFields(i, setGuestInputFields, guestInputFields) }}><HiUserRemove /></button>
                                 <br />
                             </div>
                         )
