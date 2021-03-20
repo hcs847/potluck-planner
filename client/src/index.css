@@ -552,7 +552,11 @@ footer {
 h1,h2,h3,h4 {
   font-family: 'Lora', serif;
 }
-h1 {font-size: 4.5rem;}
+h1 {
+  font-size: 4.5rem;
+  line-height: 1;
+
+}
 
 h2 {
   color: white;
@@ -659,9 +663,9 @@ footer h2 {
 .landing-font h3,h2 {
   color: var(--blue-grey);
 }
+
 .landing-font h1 {
   color: var(--orange);
-  font-size:4.4rem;
 }
 .landing-font-h3 {
   font-size: 2rem;
@@ -709,9 +713,30 @@ footer h2 {
     font-size: 2.5rem;;
   }
 
+  .landing-font-h3 {
+    font-size: 1.5rem;
+  }
+
+  .landing-page {
+    flex-direction: column;
+    gap:1em;
+  }
+
+  .landing-font {
+    padding:0;
+  }
+
+  input.forminput, textarea.forminput, input {
+    width: 60%;
+  }
+
+  .login-join-background {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
   .recipestitle, .potlucktitle, .events-title {
     font-size: 1.6rem;
-
   }
 
   .header h1 {
@@ -761,5 +786,27 @@ footer h2 {
     width: 100%;
     font-size: 1.rem;
   }
+
+  .event-page {
+    max-width:95%;
+  }
+  .event-message {
+    width: 95%;
+  }
+
+  .event-container {
+    margin: 0.1rem;
+    font-size: 1rem;
+  }
+
+  .event-message, .event-details h3 {
+    font-size: 1.2rem;
+  }
+
+  .dish > * {
+    flex-basis: 22%; 
+    margin-bottom: 0.1em;
+    font-size: 0.8rem;
+}
 
 }

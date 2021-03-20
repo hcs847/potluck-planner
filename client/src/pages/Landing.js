@@ -12,7 +12,7 @@ const Landing = () => {
 
     return (
         <>
-            <div className="flex-around">
+            <div className="landing-page flex-around">
                 <div className="landing-font flex-col">
                     <h3>Say Hello To Your New</h3>
                     <h1>Potluck Planner</h1>
