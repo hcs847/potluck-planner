@@ -7,7 +7,7 @@ function Header() {
     // logout functionality
     const logout = e => {
         e.preventDefault();
-        console.log("logout");
+        // console.log("logout");
         Auth.logout();
     };
     return (
@@ -17,7 +17,7 @@ function Header() {
             </div>
             <nav className="nav flex-right">
                 <>
-                    {Auth.loggedIn ? (
+                    {Auth.loggedIn() ? (
                         <>
                             <ul className="navlist flex">
                                 <Link to='/home'>

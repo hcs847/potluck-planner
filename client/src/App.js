@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, useLocation } from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
@@ -27,6 +27,9 @@ const client = new ApolloClient({
 });
 
 function App() {
+  // const { pathname } = useLocation();
+  // console.log("tabt", tab.pathname);
+
   return (
     <ApolloProvider client={client}>
       <Router>

@@ -3,8 +3,11 @@ import { Link, Redirect } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_EVENTS } from '../utils/queries';
 import Auth from '../utils/auth';
+import Plate from '../images/plate.svg'
 
 const Home = () => {
+
+
     const { data } = useQuery(QUERY_EVENTS);
     const events = data?.events || [];
 
@@ -21,12 +24,23 @@ const Home = () => {
         <>
             {/* <div className="eventbackground"> */}
 
-            <div className="eventorange">
-                <h2>Your Events</h2>
-                <ul className="eventlist" style={{ listStyle: "none" }}>
+            <div className="events-container">
+                <div className="title-container">
+                    <div className="events-title">
+                        <h2>Your Events</h2>
+                    </div>
+                </div>
+                {/* <img className='plate' src={Plate} alt="" /> */}
+                <ul className="eventlist">
                     {events.map(event => (
                         <Link key={event._id} to={`/event/${event._id}`}>
-                            <li style={{ textDecoration: "none", fontWeight: "bolder" }}>{event.eventName}</li>
+                            <li className="event-item"><span className='event-date'>
+                                {new Date(event.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit' })}
+                            </span>
+                                <span className='event-name'>
+                                    {event.eventName}
+                                </span>
+                            </li>
                         </Link>
 
                     ))}

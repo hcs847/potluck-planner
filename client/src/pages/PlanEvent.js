@@ -11,7 +11,7 @@ function PlanEvent() {
         return (<Redirect to='/' />)
     };
     return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className='home-image'>
 
             <EventForm />
         </div>
