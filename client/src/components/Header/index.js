@@ -7,7 +7,6 @@ function Header() {
     // logout functionality
     const logout = e => {
         e.preventDefault();
-        // console.log("logout");
         Auth.logout();
     };
     return (
