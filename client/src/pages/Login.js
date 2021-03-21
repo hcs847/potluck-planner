@@ -11,7 +11,6 @@ const Login = (event) => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        // console.log(name, value);
         setFormState({
             ...formState,
             [name]: value
@@ -24,7 +23,6 @@ const Login = (event) => {
             const mutationResponse = await login({ variables: { email: formState.email, password: formState.password } })
             const token = mutationResponse.data.login.token;
             Auth.login(token);
-            // console.log("Loggedin");
         } catch (e) {
             console.log(e)
         }
@@ -32,7 +30,7 @@ const Login = (event) => {
 
     return (
         <>
-            <div className="login-join-background flex-col">
+            <div className="login-join-background flex-col flex-center">
                 <h3>Sign In</h3>
                 <form className="form-center flex-col" onSubmit={handleFormSubmit}>
                     <div className='login-join-field'>
@@ -65,7 +63,7 @@ const Login = (event) => {
                         <button className='btn blue-background' type='submit'>Sign In</button>
                     </div>
                 </form>
-                <br />
+
                 <div className='login-switch'>
                     New to Potluck Planner?
                 <Link to='/signup'> Join Now</Link>

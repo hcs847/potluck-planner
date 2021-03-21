@@ -26,17 +26,18 @@ const Event = () => {
 
     const handleChangeDish = (e) => {
         setDishAssignment(e.target.value);
-        // console.log(e.target.value);
     }
 
     const handleSubmitAssignDishForm = async (e, dishId) => {
         e.preventDefault();
         setDishAssignment(e.target.value);
-        // console.log("dishid:  ", dishId, "assignment:  ", dishAssignment);
 
         try {
             await updateDish({
-                variables: { dishId: dishId, dishName: dishAssignment, }
+                variables: {
+                    dishId: dishId,
+                    dishName: dishAssignment
+                }
             });
             setDishAssignment('');
         } catch (err) {

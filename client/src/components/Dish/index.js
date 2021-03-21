@@ -37,7 +37,7 @@ function Dish({ dish, submitDish, changeDish, dishToBring }) {
                                 type='submit'>Add Dish</button>
                         </form>
                     )}
-                    <div style={{ flexBasis: '48%' }} className="dish-signed flex-around">
+                    <div className="dish-signed flex-around">
                         <span className='event-tags'>Dish Name: </span><p>{dish.dishName}</p>
                         <span className='event-tags'>Provider: </span><p>{userId ? dishProvider.firstName : ''}</p>
                     </div>

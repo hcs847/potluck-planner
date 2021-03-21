@@ -34,7 +34,7 @@ const Signup = () => {
 
     return (
         <>
-            <div className='login-join-background flex-col'>
+            <div className='login-join-background flex-col flex-center'>
                 <h3>Signup</h3>
                 <form className='form-center' onSubmit={handleFormSubmit}>
                     <div className='login-join-field'>
