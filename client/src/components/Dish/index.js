@@ -38,8 +38,8 @@ function Dish({ dish, submitDish, changeDish, dishToBring }) {
                         </form>
                     )}
                     <div style={{ flexBasis: '48%' }} className="dish-signed flex-around">
-                        <span>Dish Name: </span><p>{dish.dishName}</p>
-                        <span>Provider: </span><p>{userId ? dishProvider.firstName : ''}</p>
+                        <span className='event-tags'>Dish Name: </span><p>{dish.dishName}</p>
+                        <span className='event-tags'>Provider: </span><p>{userId ? dishProvider.firstName : ''}</p>
                     </div>
                 </li>
             )}

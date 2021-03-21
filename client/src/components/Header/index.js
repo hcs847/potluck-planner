@@ -15,7 +15,7 @@ function Header() {
             <div className='header'>
                 <h1>Potluck Planner</h1>
             </div>
-            <nav className="nav flex-right">
+            <nav className="nav flex-start">
                 <>
                     {Auth.loggedIn() ? (
                         <>

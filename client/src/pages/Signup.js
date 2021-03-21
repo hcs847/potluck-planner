@@ -35,7 +35,7 @@ const Signup = () => {
     return (
         <>
             <div className='login-join-background flex-col'>
-                <h2>Signup</h2>
+                <h3>Signup</h3>
                 <form className='form-center' onSubmit={handleFormSubmit}>
                     <div className='login-join-field'>
                         <label htmlFor="firstName">First Name:</label>
@@ -77,7 +77,7 @@ const Signup = () => {
                             onChange={handleChange} />
                     </div>
                     <div>
-                        <button className='btn' type="submit">Join</button>
+                        <button className='btn blue-background' type="submit">Join</button>
                     </div>
                 </form>
                 <div className='login-switch'>
