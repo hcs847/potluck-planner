@@ -33,7 +33,7 @@ const Login = (event) => {
     return (
         <>
             <div className="login-join-background flex-col">
-                <h2>Sign In</h2>
+                <h3>Sign In</h3>
                 <form className="form-center flex-col" onSubmit={handleFormSubmit}>
                     <div className='login-join-field'>
                         <label htmlFor="email">Email: </label>
