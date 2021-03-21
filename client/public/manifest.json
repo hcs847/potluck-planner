@@ -2,7 +2,7 @@
   "name": "Potluck Planner",
   "short_name": "Potluck Planner",
   "description": "An app for planning your next potluck",
-  "start_url": "https://potluckplannertest.herokuapp.com/",
+  "start_url": "https://your-potluck-planner.herokuapp.com/",
   "display": "standalone",
   "theme_color": "#19424b",
   "background_color": "#fff",
