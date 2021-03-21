@@ -19,7 +19,6 @@ Once the potluck event has been created, the host and other guests can sign up f
 Guests can also research recipes within their food category on the 'Recipes' page.
 <img width="800" alt="Screen Shot 2021-03-21 at 2 43 36 PM" src="https://user-images.githubusercontent.com/71052027/111923061-851ea580-8a5a-11eb-823c-b0a0f6cc0384.png">
 
-Now, quit ordering your overpriced delivery meals and plan that potluck!
 
 ## Technologies Used
 - React
