@@ -14,6 +14,9 @@ const EventForm = () => {
 
     // get single event from db once available
     const singleEvent = data?.event || '';
+    // test=================
+    const { dishes, guests } = singleEvent;
+
 
     // create  event function from graphql mutations functions
     const [addEvent, { error }] = useMutation(ADD_EVENT);
@@ -27,6 +30,7 @@ const EventForm = () => {
     // state for dynamic input fields for dishes and guests arrays
     const dishObj = {
         dishType: ""
+        , dishName: ""
     };
     const [dishInputFields, setDishInputFields] = useState([dishObj]);
     const [guestInputFields, setGuestInputFields] = useState([""]);
@@ -112,6 +116,7 @@ const EventForm = () => {
     // store in state event id once form is submitted
     const [eventId, setEventId] = useState('');
 
+    // submit form to create an event
     const handleSubmitEventForm = async e => {
         e.preventDefault();
 
@@ -138,27 +143,50 @@ const EventForm = () => {
                     guests: guestInputFields
                 }
             ]);
-            // console.log("data, event.state when submitting", data, eventState);
+            console.log("data, event.state when submitting", data, eventState);
 
         } catch (err) {
             console.error(err);
         }
     };
 
+    // extract dishes testing
+    // =============================
+    const updatedDishes = dishInputFields.map(dish => [{ "dishType": dish.dishType, "dishName": dish.dishName }]);
+    const testObj = {
+        eventId: id,
+        eventName: eventState.eventName,
+        message: eventState.message,
+        date: eventState.date,
+        time: eventState.time,
+        location: eventState.location,
+        dishes: dishInputFields,
+        guests: guestInputFields
+    }
+
     //  update an event
     const handleUpdateEvent = async e => {
         e.preventDefault();
-        console.log("id", id, "eventstate from Update:", eventState, "single event:", singleEvent);
-        // try {
-        //     await updateEvent({
-        //         variables: { ...eventState, eventId: id }
-        //     });
-        //     console.log("id from update: ", id)
-        //     //    Redirect to home
-        //     setTimeout(() => { window.location.assign('/home') }, 2000);
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        console.log("id", id, "eventstate from Update:", eventState, "single event:", singleEvent, "updated-dishes", updatedDishes[0], "testobj: ", testObj);
+        try {
+            await updateEvent({
+                variables: {
+                    eventId: id,
+                    eventName: eventState.eventName,
+                    message: eventState.message,
+                    date: eventState.date,
+                    time: eventState.time,
+                    location: eventState.location,
+                    dishes: dishInputFields,
+                    guests: guestInputFields
+                }
+            });
+            console.log("id from update: ", id);
+            //    Redirect to home
+            setTimeout(() => { window.location.assign('/home') }, 2000);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     // delete an event
@@ -180,11 +208,16 @@ const EventForm = () => {
     useEffect(() => {
         if (id) {
             // if an id is in the url, update state for form
-            setDishInputFields(singleEvent.dishes);
+            // test==================================
+            setDishInputFields(updatedDishes);
+            // =======================
             setGuestInputFields(singleEvent.guests);
-            setEventState(singleEvent);
+            setEventState([{
+                ...singleEvent, dishes: [...dishInputFields],
+                guests: guestInputFields
+            }]);
         }
-        // console.log(singleEvent, dishInputFields, guestInputFields);
+        console.log("uE singleEvent dishes :", dishes, '/n', "dishInput-uE", dishInputFields, '/n', "eventState uE:", eventState);
     }, [singleEvent, id]);
 
     return (
