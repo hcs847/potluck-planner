@@ -327,6 +327,7 @@ z-index: -1;
 .dish-signed p {
   font-weight: 700;
   background-color: white;
+  margin: auto 0;
 }
 
 .dish-type {
