@@ -33,9 +33,9 @@ const Login = (event) => {
     return (
         <>
             <div className="login-join-background flex-col">
-                <h2>Sign In</h2>
+                <h3>Sign In</h3>
                 <form className="form-center flex-col" onSubmit={handleFormSubmit}>
-                    <div>
+                    <div className='login-join-field'>
                         <label htmlFor="email">Email: </label>
                         <input
                             placeholder='youremail@email.com'
@@ -45,12 +45,12 @@ const Login = (event) => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div>
+                    <div className='login-join-field'>
                         <label htmlFor="pwd">Password:</label>
                         <input
                             placeholder='******'
                             name='password'
-                            type='passwrod'
+                            type='password'
                             id='pwd'
                             onChange={handleChange}
                         />
@@ -62,11 +62,11 @@ const Login = (event) => {
 
                     }
                     <div>
-                        <button className='btn' type='submit'>Sign In</button>
+                        <button className='btn blue-background' type='submit'>Sign In</button>
                     </div>
                 </form>
                 <br />
-                <div>
+                <div className='login-switch'>
                     New to Potluck Planner?
                 <Link to='/signup'> Join Now</Link>
                 </div>

@@ -44,7 +44,7 @@ const Event = () => {
         }
     }
 
-    // check if user is loggedin or direct to landing page
+    // check if user is loggedin or redirect to landing page
     if (!Auth.loggedIn()) {
         return (<Redirect to='/' />)
     };
@@ -59,20 +59,20 @@ const Event = () => {
                         <div className="event-container flex-col">
                             <ul className='event-details  flex-around'>
                                 <li>Date:<h3> {event.date}</h3></li>
-                                <li>Time:<h3> {event.time}</h3></li>
+                                <li>Time:<h3 className='event-right'> {event.time}</h3></li>
                                 <li>Location: <h3>{event.location}</h3></li>
-                                <li>Hosted By: <h3>{event.host.firstName} {event.host.lastName}</h3></li>
+                                <li>Hosted By: <h3 className='event-right'>{event.host.firstName} {event.host.lastName}</h3></li>
                             </ul>
                             <div className="event-message">
                                 <p>{event.message}</p>
                             </div>
                             <div className="event-dish-table flex-col">
                                 <div className="dish-title flex-around">
-                                    <h4>Available Dishes To Share:</h4>
+                                    <h4>Dishes To Share:</h4>
                                     <h4>Sign Up / Filled by</h4>
                                 </div>
                                 {event.dishes.map(dish => (
-                                    <ul className='dish'>
+                                    <ul className='dish flex-between'>
                                         <Dish
                                             dish={dish}
                                             submitDish={handleSubmitAssignDishForm}
@@ -88,7 +88,7 @@ const Event = () => {
                             <h4 >Guest List:</h4>
                             <ul className='guest-list flex-col' >
                                 {event.guests.map(guest => (
-                                    <li key={`guest${event.guests.indexOf(guest)}`} style={{ margin: '0.5rem' }}>Email: {guest}</li>
+                                    <li key={`guest${event.guests.indexOf(guest)}`}>Email: {guest}</li>
                                 ))}
                             </ul>
                             <Link to={`/potluck/${eventId}`}>
