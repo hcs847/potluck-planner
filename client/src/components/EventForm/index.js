@@ -15,6 +15,10 @@ const EventForm = () => {
     // get single event from db once available
     const singleEvent = data?.event || '';
 
+    // decustruct dishes in order to map through for updateEvents
+    const { dishes } = singleEvent;
+
+
     // create  event function from graphql mutations functions
     const [addEvent, { error }] = useMutation(ADD_EVENT);
 
@@ -22,11 +26,14 @@ const EventForm = () => {
     const [deleteEvent, { error: deleteError }] = useMutation(DELETE_EVENT);
 
     // update event mutation function
-    const [updateEvent, { error: updateError }] = useMutation(UPDATE_EVENT);
+    const [updateEvent, { error: updateEventError }] = useMutation(UPDATE_EVENT);
 
     // state for dynamic input fields for dishes and guests arrays
     const dishObj = {
-        dishType: ""
+        dishType: "",
+        // dish name and provider are set when a guest assigns a dish
+        dishName: "",
+        provider: ""
     };
     const [dishInputFields, setDishInputFields] = useState([dishObj]);
     const [guestInputFields, setGuestInputFields] = useState([""]);
@@ -79,7 +86,6 @@ const EventForm = () => {
     // updating value of guests input fields per entries
     const handleChangeGuestInputFields = (id, e) => {
         const newGuestInputfields = guestInputFields.map(guest => {
-            // console.log("new guests", id, guestInputFields.indexOf(guest));
             if (id === guestInputFields.indexOf(guest)) {
                 return e.target.value;
             }
@@ -97,7 +103,6 @@ const EventForm = () => {
     const handleRemoveInputFields = (id, setInputFields, inputFields) => {
         const newInputFields = inputFields.filter(inputField => inputFields.indexOf(inputField) !== id);
         setInputFields([...newInputFields]);
-        // console.log(newInputFields);
     }
 
     // handling change for basic key:value pairs within form
@@ -112,6 +117,7 @@ const EventForm = () => {
     // store in state event id once form is submitted
     const [eventId, setEventId] = useState('');
 
+    // submit form to create an event
     const handleSubmitEventForm = async e => {
         e.preventDefault();
 
@@ -124,10 +130,11 @@ const EventForm = () => {
             setEventId(data.addEvent._id);
             // clearing form inputs
             setDishInputFields([{
-                dishType: ''
+                dishType: '',
+                dishName: ''
             }]);
-            setGuestInputFields([""]);
-            setEventState([
+            setGuestInputFields(['']);
+            setEventState(
                 {
                     eventName: '',
                     message: '',
@@ -137,28 +144,45 @@ const EventForm = () => {
                     dishes: dishInputFields,
                     guests: guestInputFields
                 }
-            ]);
-            // console.log("data, event.state when submitting", data, eventState);
+            );
 
         } catch (err) {
             console.error(err);
         }
     };
 
+    // updating dishes array in order to match DishInput of graphql typeDefs   
+    const updatedDishes = dishes?.map(dish => ({
+        dishType: dish.dishType,
+        // dish name and provider are extracted from db 
+        // in order not to lose its data
+        // but not visible/open to changes by host
+        dishName: dish.dishName,
+        provider: dish.provider
+    }));
+
+
+
     //  update an event
     const handleUpdateEvent = async e => {
         e.preventDefault();
-        console.log("id", id, "eventstate from Update:", eventState, "single event:", singleEvent);
-        // try {
-        //     await updateEvent({
-        //         variables: { ...eventState, eventId: id }
-        //     });
-        //     console.log("id from update: ", id)
-        //     //    Redirect to home
-        //     setTimeout(() => { window.location.assign('/home') }, 2000);
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            await updateEvent({
+                // updating eventId and dishes to match graphql structure
+                // and extracting all the rest of eventState as is
+                variables: {
+                    eventId: id,
+                    ...eventState,
+                    dishes: dishInputFields,
+
+                }
+            });
+
+            //    Redirect to home
+            setTimeout(() => { window.location.assign('/home') }, 1000);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     // delete an event
@@ -178,14 +202,20 @@ const EventForm = () => {
 
     // extract event details when eventId is available in useParams
     useEffect(() => {
+        // if an event id is in the url, update state for form
         if (id) {
-            // if an id is in the url, update state for form
-            setDishInputFields(singleEvent.dishes);
+            // update the dishes array to match graphql structure
+            setDishInputFields(updatedDishes);
+            // update guests from singleEvent as is since matching graphql
             setGuestInputFields(singleEvent.guests);
-            setEventState(singleEvent);
+            // once guests and dishes are updated
+            // pull the rest of eventState properties from singleEvent(db)
+            setEventState(
+                singleEvent
+            );
         }
-        // console.log(singleEvent, dishInputFields, guestInputFields);
-    }, [singleEvent, id]);
+
+    }, []);
 
     return (
         // change form type to update if id is provided
@@ -198,13 +228,13 @@ const EventForm = () => {
                     )
                 }
             </div>
-            <br />
-            <div className="potluckorange">
 
+            <div className="potluckorange">
                 {/* change the function from submit to update event when id is available */}
                 <form onSubmit={!id ? (handleSubmitEventForm) : (handleUpdateEvent)}>
                     {/* log an error message  */}
-                    {error && <span style={{ color: 'red' }}>Something went wrong...</span>}
+                    {error && <span style={{ color: 'red' }}>Something went wrong with creating the event...</span>}
+                    {updateEventError && <span style={{ color: 'red' }}>Something went wrong with updating the event...</span>}
                     <div>
                         <label className="potluckform" htmlFor="eventName">Event Name:</label>
                         <input className="forminput"
@@ -317,7 +347,7 @@ const EventForm = () => {
                 {id && (
                     <>
                         <br />
-                        <button className="btn" style={{ width: "12vw" }} onClick={handleDeleteEvent}>Delete Event</button>
+                        <button className="btn" onClick={handleDeleteEvent}>Delete Event</button>
                         {deleteError && (
                             <span style={{ color: 'red' }}>Something went wrong...</span>
                         )}

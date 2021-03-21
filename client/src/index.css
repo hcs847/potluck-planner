@@ -45,8 +45,8 @@ flex-direction: column;
 
 .flex-center {
   display:flex;
-  flex-direction: center;
   align-items: center;
+  margin: auto;
 }
 
 .flex-around {
@@ -324,9 +324,14 @@ z-index: -1;
   background-color: var(--orange);
 }
 
+.dish-signed {
+  flex-basis: 55%;
+}
+
 .dish-signed p {
   font-weight: 700;
   background-color: white;
+  margin: auto 0;
 }
 
 .dish-type {
@@ -687,6 +692,7 @@ footer h2 {
     right: auto;
     left: auto;
     position: relative;
+    width: 38%;
   }
   
   .eventlist > a li {
@@ -695,9 +701,6 @@ footer h2 {
 }
 
 @media(max-width:1345px) {
-  .events-container {
-    width: 35%;
-  }
   .eventlist > a li {
     width: 35vw;
   }
@@ -717,6 +720,21 @@ footer h2 {
 }
 
 @media(max-width:1050px) {
+  .landing-font {
+    padding: 2em 2em;
+  }
+
+  h1 {
+    font-size:3.5rem;
+  }
+  h2 {
+    font-size: 2.5rem;;
+  }
+  
+  .landing-font h3 {
+    font-size: 1.5rem;
+  }
+
   .eventlist > a li {
     width: 40vw;
   }
@@ -725,7 +743,7 @@ footer h2 {
   }
 
   .header h1 {
-    font-size: 3.2rem;
+    font-size: 3rem;
   }
 
   .logo {
@@ -734,6 +752,13 @@ footer h2 {
 }
 
 @media(max-width:920px) {
+  .login-join-background {
+    max-width: 40%;
+  }
+
+  .landing-font {
+    padding: 2em 0.5em;
+  }
   .eventlist > a li {
     width: 45vw;
   }
@@ -748,6 +773,10 @@ footer h2 {
   footer h2 {
     font-size:2rem;
   }
+  .page-image {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(221,107,35,0.13)),url('../src/images/invites2.jpg');
+  }
+
 }
 
 @media(max-width:820px) {
@@ -755,7 +784,13 @@ footer h2 {
   .header h1 {
     max-width: 35%;
   }
+.login-join-background {
+  max-width: 36%;
+}
 
+.login-switch {
+  text-align: center;
+}
   .eventlist > a li {
     width: 75vw;
   }
@@ -763,13 +798,15 @@ footer h2 {
     width: 75%;
   }
 
-  .page-image {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(221,107,35,0.13)),url('../src/images/invites2.jpg');
-  }
+  
 }
 
 @media(max-width: 600px) {
-  
+  .login-join-background {
+    max-width: 80%;
+    margin: 0 auto;
+  } 
+
 .navlink {
   font-size:0.9rem;
 }
@@ -800,11 +837,6 @@ input.forminput, textarea.forminput, input {
 
 label.potluckform {
   width: 48%;
-}
-
-.login-join-background {
-  max-width: 80%;
-  margin: 0 auto;
 }
 
 .recipestitle, .potlucktitle, .events-title {

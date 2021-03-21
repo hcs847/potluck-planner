@@ -21,8 +21,6 @@ const Home = () => {
 
     return (
         <>
-            {/* <div className="eventbackground"> */}
-
             <div className="events-container">
                 <div className="title-container">
                     <div className="events-title">
@@ -45,7 +43,6 @@ const Home = () => {
                     ))}
                 </ul>
             </div>
-
         </>
     )
 }
