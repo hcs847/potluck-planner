@@ -3,7 +3,6 @@ import { Link, Redirect } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_EVENTS } from '../utils/queries';
 import Auth from '../utils/auth';
-import Plate from '../images/plate.svg'
 
 const Home = () => {
 
@@ -30,7 +29,7 @@ const Home = () => {
                         <h2>Your Events</h2>
                     </div>
                 </div>
-                {/* <img className='plate' src={Plate} alt="" /> */}
+
                 <ul className="eventlist">
                     {events.map(event => (
                         <Link key={event._id} to={`/event/${event._id}`}>

@@ -217,7 +217,7 @@ const EventForm = () => {
                     </div>
                     <br /> <br />
                     <div>
-                        <label className="potluckform" htmlFor="message">Welcome message for guests</label>
+                        <label className="potluckform" htmlFor="message">Welcome message:</label>
                         <textarea className="forminput"
                             placeholder="Welcome message:"
                             name="message"
@@ -239,7 +239,7 @@ const EventForm = () => {
                     </div>
                     <br /> <br />
                     <div>
-                        <label className="potluckform" className="potluckform" htmlFor="time">Time:</label>
+                        <label className="potluckform" htmlFor="time">Time:</label>
                         <input className="forminput"
                             placeholder="Event's time"
                             name="time"
