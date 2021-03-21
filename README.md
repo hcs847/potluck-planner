@@ -48,8 +48,6 @@ Guests can also research recipes within their food category on the 'Recipes' pag
 ## Deployed Link
 https://your-potluck-planner.herokuapp.com/
 
-## License
-
 ## Contact
  
 Hila Caspi - caspi.home@gmail.com
