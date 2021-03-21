@@ -42,6 +42,6 @@ https://your-potluck-planner.herokuapp.com/
 
 ## Contact
  
-Hila Caspi - caspi.home@gmail.com
-Stephen Beiter - stephenbeiter@gmail.com
-Bennett Collier - bennett.collier1@gmail.com
+- Hila Caspi - caspi.home@gmail.com
+- Stephen Beiter - stephenbeiter@gmail.com
+- Bennett Collier - bennett.collier1@gmail.com
