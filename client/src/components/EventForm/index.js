@@ -31,9 +31,9 @@ const EventForm = () => {
     // state for dynamic input fields for dishes and guests arrays
     const dishObj = {
         dishType: "",
-        // dish name and provider are set when a guest assigns a dish
-        dishName: "",
-        provider: ""
+        // dish name to be assigned by guest
+        dishName: ""
+
     };
     const [dishInputFields, setDishInputFields] = useState([dishObj]);
     const [guestInputFields, setGuestInputFields] = useState([""]);
@@ -131,7 +131,8 @@ const EventForm = () => {
             // clearing form inputs
             setDishInputFields([{
                 dishType: '',
-                dishName: ''
+                dishName: '',
+
             }]);
             setGuestInputFields(['']);
             setEventState(
@@ -357,7 +358,7 @@ const EventForm = () => {
                 {
                     eventId && (
                         <Link to={`/event/${eventId}`}>
-                            <button className="btn" style={{ color: "navy", fontWeight: '700', fontSize: "1rem", width: "16vw", margin: "0.5rem" }}>
+                            <button className="btn">
                                 Review Event
                     </button>
                         </Link>
