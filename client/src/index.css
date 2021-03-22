@@ -573,6 +573,7 @@ h3 {
   line-height: 1.375rem;
   min-height: 2.6rem;
   padding: 0 .625rem;
+  margin-bottom: 0.5rem;
 }
 
 .btn.icon {
@@ -599,7 +600,7 @@ h3 {
   font-family: 'Lora', serif;
   padding: 0 .625rem;
   width: 100%;
-  margin-top:0.5rem;
+  margin-bottom:0.3rem;
   line-height: 1.375rem;
   min-height: 2.6rem;
 }
