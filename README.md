@@ -35,10 +35,7 @@ The landing page shows the option to either sign in with an existing account cre
 https://your-potluck-planner.herokuapp.com/
 
 ## Site Images
-<img width="415" alt="Screen Shot 2021-03-21 at 2 44 22 PM" src="https://user-images.githubusercontent.com/71052027/111921894-4685ec80-8a54-11eb-845e-67f92ea1fd95.png">   <img width="415" alt="Screen Shot 2021-03-21 at 2 45 25 PM" src="https://user-images.githubusercontent.com/71052027/111921955-982e7700-8a54-11eb-95ae-637cd16f1bf9.png">
-<img width="415" alt="Screen Shot 2021-03-21 at 3 36 35 PM" src="https://user-images.githubusercontent.com/71052027/111923240-6c62bf80-8a5b-11eb-9699-e5bbee813337.png">   <img width="415" alt="Screen Shot 2021-03-21 at 2 42 49 PM" src="https://user-images.githubusercontent.com/71052027/111923034-6f10e500-8a5a-11eb-9bba-d55af2c58838.png">
-<img width="415" alt="Screen Shot 2021-03-21 at 2 46 15 PM" src="https://user-images.githubusercontent.com/71052027/111922981-2822ef80-8a5a-11eb-8f1c-ee2c4ad6a87d.png">   <img width="415" alt="Screen Shot 2021-03-21 at 2 43 36 PM" src="https://user-images.githubusercontent.com/71052027/111923061-851ea580-8a5a-11eb-823c-b0a0f6cc0384.png">
-<img width="300" alt="Screen Shot 2021-03-21 at 4 39 42 PM" src="https://user-images.githubusercontent.com/71052027/111925022-59a0b880-8a64-11eb-9d37-105e73f310c1.png">   <img width="300" alt="Screen Shot 2021-03-21 at 4 46 26 PM" src="https://user-images.githubusercontent.com/71052027/111925192-0c711680-8a65-11eb-8934-822eb8bc6a8d.png">
+
 
 ## Contact
  
