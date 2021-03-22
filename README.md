@@ -35,7 +35,7 @@ The landing page shows the option to either sign in with an existing account cre
 https://your-potluck-planner.herokuapp.com/
 
 ## Site Images
-
+![](potluck-planner.gif)
 
 ## Contact
  
